@@ -1,3 +1,81 @@
 <resources>
     <string name="app_name">Audit Mobil</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_home">Audit Mobil</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_nomor_polisi">Nomor Polisi</string>
+    <string name="hint_pengelola">Pengelola/Transportir/Agen</string>
+    <string name="hint_tgl_pemeriksaan_terakhir">Tanggal Pemeriksaan Terakhir</string>
+    <string name="hint_tgl_pemeriksaan">Tanggal Pemeriksaan</string>
+    <string name="hint_merek_mobil">Merek / Tahun</string>
+    <string name="hint_jenis_produk">Jenis Produk</string>
+    <string name="hint_kapasitas">Kapasitas</string>
+    <string name="hint_lokasi">Lokasi</string>
+    <string name="hint_tgl">Tangggal</string>
+    <string name="hint_ket">Keterangan</string>
+    <string name="hint_uji_emisi">Uji Emisi (Max. 50%)</string>
+
+    <string name="text_login">Login</string>
+    <string name="text_silahkan_login">Silahkan login terlebih dahulu</string>
+    <string name="text_periksa">Pemeriksaan</string>
+    <string name="text_stnk">STNK</string>
+    <string name="text_keur_llajr">Keur LLAJR</string>
+    <string name="text_umum">Umum</string>
+    <string name="text_battery">Battery / Accu</string>
+    <string name="text_kabel">Kabel Listrik</string>
+    <string name="text_kemudi">Alat Kemudi</string>
+    <string name="text_knalpot">Knalpot</string>
+    <string name="text_lain">Lain - lain</string>
+    <string name="text_lampu">Lampu - lampu</string>
+    <string name="text_motor">Motor</string>
+    <string name="text_pemadam">Alat Pemadam</string>
+    <string name="text_pengangkut">Bak Pengangkut Tabung</string>
+    <string name="text_peringatan">Tanda Peringatan</string>
+    <string name="text_rem">Rem Kaki / Tanga</string>
+    <string name="text_roda">Roda / Ban</string>
+    <string name="text_lanjut">Lanjut</string>
+
+    <string name="text_safety_switch_1">Safety switch (utk. accu) mudah terjangkau</string>
+    <string name="text_safety_switch_2">Safety switch (utk. accu) yang diputus arus + dari accu</string>
+    <string name="text_safety_switch_3">Starter sambungan kabel dari tombol ke dynamo terpasang dengan baik</string>
+
+    <string name="text_knalpot_1">Ditempatkan di depan bengkok kanan dan tidak bocor</string>
+    <string name="text_knalpot_2">Saringan knalpot menggunakan standar PERTAMINA</string>
+
+    <string name="text_kabel_1">Semua aliran terisolasi</string>
+    <string name="text_kabel_2">Zekering harus asli dan sesuai</string>
+
+    <string name="text_battery_1">Harus tertutup dan dilakukan perawatan secara berkala</string>
+    <string name="text_battery_2">Kabel battery terpasang dengan kuat dan terbebas dari kotoran</string>
+
+    <string name="text_lampu_1">Semua lampu menyala dan tertutup</string>
+    <string name="text_lampu_2">(Jauh / dekat/ righting/ rem/ mundur dan peringatan)</string>
+
+    <string name="text_pengangkut_1">Tidak kropos, terdapar logo PT. Pertamina dan Elpiji, </string>
+    <string name="text_pengangkut_2">Tulisan nama PT dan produk jelas pada body samping belakang</string>
+    <string name="text_pengangkut_3">Menggunakan lapisan kayu dan bak besi</string>
+
+    <string name="text_pemadam_1">DCP 20 Lbs satu buah dan CO2 satu buah</string>
+    <string name="text_pemadam_2">Nozle, slang, powder, catridge, cat dalam keadaan baik</string>
+
+    <string name="text_rem_1">Bekerja pada masing - masing sumbunya dan tidak dikocok</string>
+
+    <string name="text_ban_1">Ban depan tidak vulkasinir / tidak gundul </string>
+    <string name="text_ban_2">Ban belakang ada cadangan tidak gundul</string>
+
+    <string name="text_kemudi_1">Olah gerak maksimum 60 derajat</string>
+    <string name="text_kemudi_2">Dapat digerakan dengan tenaga wajar</string>
+
+    <string name="text_peringatan_1">Dilarang merokok, menumpang, logo bahan bakar gas mudah terbakar, kecepatan maksimum</string>
+
+    <string name="text_lain_1">Kotak obat P3K, kipas kaca, segitiga pengaman lengkap </string>
+    <string name="text_lain_2">Pintu bisa dibuka dengan mudah, body kendaraan tidak keropos</string>
+    <string name="text_lain_3">Spatbor lengkap, kaca spion lengkap, dongkrak dan peralatanya</string>
+
+
 </resources>
