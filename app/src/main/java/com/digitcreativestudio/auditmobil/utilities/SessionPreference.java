@@ -23,6 +23,7 @@ public class SessionPreference {
     private static final String PREF_NAME = "AuditMobil";
     private static final String IS_LOGIN = "IsLoggedIn";
     private static final String KEY_USER = "user";
+    private static final String KEY_CAR_ID = "car_id";
 
 
 
@@ -56,7 +57,20 @@ public class SessionPreference {
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         _context.startActivity(i);
+    }
 
+    public void setCarId(int carId){
+        editor.putInt(KEY_CAR_ID, carId);
+        editor.commit();
+    }
+
+    public int getCarId(){
+        return pref.getInt(KEY_CAR_ID, -1);
+    }
+
+    public void removeCarId(){
+        editor.remove(KEY_CAR_ID);
+        editor.commit();
     }
 
     public boolean isLoggedIn(){

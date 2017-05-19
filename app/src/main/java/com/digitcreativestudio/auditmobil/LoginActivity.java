@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }else if(password.equals("")){
                 ((EditText) findViewById(R.id.password_edit_text)).setError("Masukkan password");
             }else{
+//                progressDialog.show();
 //                AuditService apiService = AuditClient.getClient().create(AuditService.class);
 //                Call<LoginParser> call = apiService.login(email, password);
 //                call.enqueue(new Callback<LoginParser>() {

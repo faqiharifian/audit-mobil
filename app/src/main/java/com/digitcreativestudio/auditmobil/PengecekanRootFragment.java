@@ -32,11 +32,8 @@ public class PengecekanRootFragment extends Fragment {
     public PengecekanRootFragment() {
     }
 
-    public static PengecekanRootFragment newInstance(int sectionNumber) {
+    public static PengecekanRootFragment newInstance() {
         PengecekanRootFragment fragment = new PengecekanRootFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -70,6 +67,7 @@ public class PengecekanRootFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int position = pager.getCurrentItem();
+                BaseFragment baseFragment = (BaseFragment) adapter.getItem(position);
                 if(position < adapter.getCount()){
                     pager.setCurrentItem(position+1);
                     backImageView.setVisibility(View.VISIBLE);

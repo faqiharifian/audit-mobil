@@ -1,19 +1,27 @@
 package com.digitcreativestudio.auditmobil;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.digitcreativestudio.auditmobil.utilities.SessionPreference;
+import com.digitcreativestudio.auditmobil.view.ProgressDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -30,6 +38,12 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        sessionPreference = new SessionPreference(this);
+        if(!sessionPreference.isLoggedIn()){
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -38,12 +52,22 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        sessionPreference = new SessionPreference(this);
-        if(!sessionPreference.isLoggedIn()){
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
-        }
-
+        mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+            @Override
+            public void onPageSelected(int position) {
+                if(sessionPreference.getCarId() == -1){
+                    mViewPager.setCurrentItem(0);
+                    Toast.makeText(HomeActivity.this, "Mohon isi data mobil terlebih dahulu", Toast.LENGTH_LONG).show();
+                }else{
+                    if(getCurrentFocus() != null) {
+                        InputMethodManager inputManager = (InputMethodManager)
+                                getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                                InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
+                }
+            }
+        });
     }
 
 
@@ -65,25 +89,77 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void postCar(View view){
+        BaseFragment baseFragment = (BaseFragment) mSectionsPagerAdapter.getItem(mViewPager.getCurrentItem());
+        if(baseFragment.isValid()){
+            final ProgressDialog progressDialog = new ProgressDialog(HomeActivity.this);
+
+//            progressDialog.show();
+//
+//            AuditService auditService = AuditClient.getClient().create(AuditService.class);
+//
+//            Call<CarParser> call = auditService.postCarData(baseFragment.getCar());
+//            call.enqueue(new Callback<CarParser>() {
+//                @Override
+//                public void onResponse(Call<CarParser> call, Response<CarParser> response) {
+//                    progressDialog.hide();
+//
+//                    CarParser carParser = response.body();
+//                    if(carParser.isSuccess()){
+//                        Car car = carParser.getCar();
+//                        (new SessionPreference(HomeActivity.this)).setCarId(car.getId());
+//                    }else{
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+//                        builder.setTitle("Gagal");
+//                        builder.setMessage(carParser.getMessage());
+//                        builder.setPositiveButton("OK", null);
+//                        builder.show();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<CarParser> call, Throwable t) {
+//                    progressDialog.hide();
+//
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+//                    builder.setTitle("Gagal");
+//                    builder.setMessage(t.getMessage());
+//                    builder.setPositiveButton("OK", null);
+//                    builder.show();
+//                }
+//            });
+
+            progressDialog.show();
+            (new Handler()).postDelayed(new Runnable() {
+                public void run() {
+                    progressDialog.hide();
+
+                    (new SessionPreference(HomeActivity.this)).setCarId(1);
+                    mViewPager.setCurrentItem(1);
+                }
+            }, 5000);
+        }
+    }
+
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
+        List<Fragment> fragments;
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+            fragments = new ArrayList<>();
+            fragments.add(DataMobilFragment.newInstance());
+            fragments.add(PengecekanRootFragment.newInstance());
         }
 
         @Override
         public Fragment getItem(int position) {
-            if(position==0){
-                return DataMobilFragment.newInstance(position + 1);
-            }else{
-                return PengecekanRootFragment.newInstance(position + 1);
-            }
+            return fragments.get(position);
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return fragments.size();
         }
 
         @Override
