@@ -62,7 +62,7 @@ public class PengecekanRootFragment extends Fragment {
                 int position = pager.getCurrentItem();
                 if(position > 0){
                     pager.setCurrentItem(position-1);
-                    if(position == 1) backImageView.setVisibility(View.GONE);
+                    if(position == 1) backImageView.setVisibility(View.INVISIBLE);
                 }
             }
         });
