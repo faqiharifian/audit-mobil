@@ -2,7 +2,6 @@ package com.digitcreativestudio.auditmobil;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,16 +30,6 @@ public class PengecekanKabelFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_pengecekan_kabel, container, false);
 
-        rootView.findViewById(R.id.lanjut_image_view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction trans = getFragmentManager().beginTransaction();
-                trans.replace(R.id.root_frame, new PengecekanBatteryFragment());
-                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                trans.addToBackStack(null);
-                trans.commit();
-            }
-        });
 
         return rootView;
     }
