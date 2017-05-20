@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
+import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
 
@@ -84,6 +85,23 @@ public class PengecekanLampuFragment extends AuditBaseFragment {
 
     @Override
     public boolean isChanged(Audit audit, File[] files) {
-        return false;
+        boolean isChanged = false;
+        if(audit.isInstantiated5()){
+            if(
+                    audit.isLight_on_closed_check() != this.audit.isLight_on_closed_check() ||
+                    !audit.getLight_on_closed_information().equals(this.audit.getLight_on_closed_information()) ||
+
+                    audit.isLight_overall_check() != this.audit.isLight_overall_check() ||
+                    !audit.getLight_overall_information().equals(this.audit.getLight_overall_information()) ||
+
+                    FileUtil.compare(files[0], this.files[0]) != 0 ||
+                    FileUtil.compare(files[1], this.files[1]) != 0
+                ){
+                isChanged = true;
+            }
+        }else{
+            isChanged = true;
+        }
+        return isChanged;
     }
 }

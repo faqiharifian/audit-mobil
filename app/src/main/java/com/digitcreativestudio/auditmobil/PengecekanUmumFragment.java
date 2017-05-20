@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
+import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
 
@@ -107,7 +108,7 @@ public class PengecekanUmumFragment extends AuditBaseFragment {
                     !audt.getLlajr_valid_date().equals(audit.getLlajr_valid_date()) ||
                     !audt.getLlajr_information().equals(audit.getLlajr_information()) ||
 
-                    (fils[0] != files[0]) || (fils[1] != files[1])
+                    FileUtil.compare(fils[0], files[0]) != 0 || FileUtil.compare(fils[1], files[1]) != 0
                 ){
                 isChanged = true;
             }

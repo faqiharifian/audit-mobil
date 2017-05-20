@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
+import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
 
@@ -66,6 +67,19 @@ public class PengecekanRemFragment extends AuditBaseFragment {
 
     @Override
     public boolean isChanged(Audit audit, File[] files) {
-        return false;
+        boolean isChanged = false;
+        if(audit.isInstantiated8()){
+            if(
+                    audit.isWorking_check() != this.audit.isWorking_check() ||
+                    !audit.getWorking_information().equals(this.audit.getWorking_information()) ||
+
+                    FileUtil.compare(files[0], this.files[0]) != 0
+                ){
+                isChanged = true;
+            }
+        }else{
+            isChanged = true;
+        }
+        return isChanged;
     }
 }

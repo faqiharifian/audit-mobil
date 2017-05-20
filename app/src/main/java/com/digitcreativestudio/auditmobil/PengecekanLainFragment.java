@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
+import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
 
@@ -102,6 +103,27 @@ public class PengecekanLainFragment extends AuditBaseFragment {
 
     @Override
     public boolean isChanged(Audit audit, File[] files) {
-        return false;
+        boolean isChanged = false;
+        if(audit.isInstantiated12()){
+            if(
+                    audit.isEmergency_check() != this.audit.isEmergency_check() ||
+                    !audit.getEmergency_information().equals(this.audit.getEmergency_information()) ||
+
+                    audit.isDoor_check() != this.audit.isDoor_check() ||
+                    !audit.getDoor_information().equals(this.audit.getDoor_information()) ||
+
+                    audit.isSpatbor_check() != this.audit.isSpatbor_check() ||
+                    !audit.getSpatbor_information().equals(this.audit.getSpatbor_information()) ||
+
+                    FileUtil.compare(files[0], this.files[0]) != 0 ||
+                    FileUtil.compare(files[1], this.files[1]) != 0 ||
+                    FileUtil.compare(files[2], this.files[2]) != 0
+                ){
+                isChanged = true;
+            }
+        }else{
+            isChanged = true;
+        }
+        return isChanged;
     }
 }

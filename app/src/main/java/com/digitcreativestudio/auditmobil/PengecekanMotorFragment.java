@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
+import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
 
@@ -102,6 +103,27 @@ public class PengecekanMotorFragment extends AuditBaseFragment {
 
     @Override
     public boolean isChanged(Audit audit, File[] files) {
-        return false;
+        boolean isChanged = false;
+        if(audit.isInstantiated1()){
+            if(
+                    audit.isSafety_switch_1_check() != this.audit.isSafety_switch_1_check() ||
+                    !audit.getSafety_switch_1_information().equals(this.audit.getSafety_switch_1_information()) ||
+
+                    audit.isSafety_switch_2_check() != this.audit.isSafety_switch_2_check() ||
+                    !audit.getSafety_switch_2_information().equals(this.audit.getSafety_switch_2_information()) ||
+
+                    audit.isStarter_check() != this.audit.isStarter_check() ||
+                    !audit.getStarter_information().equals(this.audit.getStarter_information()) ||
+
+                    FileUtil.compare(files[0], this.files[0]) != 0 ||
+                    FileUtil.compare(files[1], this.files[1]) != 0 ||
+                    FileUtil.compare(files[2], this.files[2]) != 0
+                ){
+                isChanged = true;
+            }
+        }else{
+            isChanged = true;
+        }
+        return isChanged;
     }
 }

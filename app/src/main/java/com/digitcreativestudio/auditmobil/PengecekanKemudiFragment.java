@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
+import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
 
@@ -84,6 +85,23 @@ public class PengecekanKemudiFragment extends AuditBaseFragment {
 
     @Override
     public boolean isChanged(Audit audit, File[] files) {
-        return false;
+        boolean isChanged = false;
+        if(audit.isInstantiated10()){
+            if(
+                    audit.isSteer_max_check() != this.audit.isSteer_max_check() ||
+                    !audit.getSteer_max_information().equals(this.audit.getSteer_max_information()) ||
+
+                    audit.isEasy_steer_check() != this.audit.isEasy_steer_check() ||
+                    !audit.getEasy_steer_information().equals(this.audit.getEasy_steer_information()) ||
+
+                    FileUtil.compare(files[0], this.files[0]) != 0 ||
+                    FileUtil.compare(files[1], this.files[1]) != 0
+                ){
+                isChanged = true;
+            }
+        }else{
+            isChanged = true;
+        }
+        return isChanged;
     }
 }

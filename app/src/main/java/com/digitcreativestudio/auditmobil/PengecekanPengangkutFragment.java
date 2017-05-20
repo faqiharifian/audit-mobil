@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
+import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
 
@@ -102,6 +103,27 @@ public class PengecekanPengangkutFragment extends AuditBaseFragment {
 
     @Override
     public boolean isChanged(Audit audit, File[] files) {
-        return false;
+        boolean isChanged = false;
+        if(audit.isInstantiated6()){
+            if(
+                    audit.isNonporous_has_logo_check() != this.audit.isNonporous_has_logo_check() ||
+                    !audit.getNonporous_has_logo_information().equals(this.audit.getNonporous_has_logo_information()) ||
+
+                    audit.isClear_writing_check() != this.audit.isClear_writing_check() ||
+                    !audit.getClear_writing_information().equals(this.audit.getClear_writing_information()) ||
+
+                    audit.isWood_coated_check() != this.audit.isWood_coated_check() ||
+                    !audit.getWood_coated_information().equals(this.audit.getWood_coated_information()) ||
+
+                    FileUtil.compare(files[0], this.files[0]) != 0 ||
+                    FileUtil.compare(files[1], this.files[1]) != 0 ||
+                    FileUtil.compare(files[2], this.files[2]) != 0
+                ){
+                isChanged = true;
+            }
+        }else{
+            isChanged = true;
+        }
+        return isChanged;
     }
 }

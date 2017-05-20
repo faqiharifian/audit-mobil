@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
+import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
 
@@ -84,6 +85,23 @@ public class PengecekanKabelFragment extends AuditBaseFragment {
 
     @Override
     public boolean isChanged(Audit audit, File[] files) {
-        return false;
+        boolean isChanged = false;
+        if(audit.isInstantiated3()){
+            if(
+                    audit.isolated_check() != this.audit.isolated_check() ||
+                    !audit.getIsolated_information().equals(this.audit.getIsolated_information()) ||
+
+                    audit.isFuse_original_check() != this.audit.isFuse_original_check() ||
+                    !audit.getFuse_original_information().equals(this.audit.getFuse_original_information()) ||
+
+                    FileUtil.compare(files[0], this.files[0]) != 0 ||
+                    FileUtil.compare(files[1], this.files[1]) != 0
+                ){
+                isChanged = true;
+            }
+        }else{
+            isChanged = true;
+        }
+        return isChanged;
     }
 }

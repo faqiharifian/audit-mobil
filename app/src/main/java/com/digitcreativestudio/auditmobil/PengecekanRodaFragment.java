@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
+import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
 
@@ -84,6 +85,23 @@ public class PengecekanRodaFragment extends AuditBaseFragment {
 
     @Override
     public boolean isChanged(Audit audit, File[] files) {
-        return false;
+        boolean isChanged = false;
+        if(audit.isInstantiated9()){
+            if(
+                    audit.isFront_tire_check() != this.audit.isFront_tire_check() ||
+                    !audit.getFront_tire_information().equals(this.audit.getFront_tire_information()) ||
+
+                    audit.isRear_tire_check() != this.audit.isRear_tire_check() ||
+                    !audit.getRear_tire_information().equals(this.audit.getRear_tire_information()) ||
+
+                    FileUtil.compare(files[0], this.files[0]) != 0 ||
+                    FileUtil.compare(files[1], this.files[1]) != 0
+                ){
+                isChanged = true;
+            }
+        }else{
+            isChanged = true;
+        }
+        return isChanged;
     }
 }

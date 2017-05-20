@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
+import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
 
@@ -86,7 +87,18 @@ public class PengecekanBatteryFragment extends AuditBaseFragment {
     public boolean isChanged(Audit audit, File[] files) {
         boolean isChanged = false;
         if(audit.isInstantiated4()){
+            if(
+                    audit.isWell_maintained_check() != this.audit.isWell_maintained_check() ||
+                    !audit.getWell_maintained_information().equals(this.audit.getWell_maintained_information()) ||
 
+                    audit.isWell_installed_check() != this.audit.isWell_installed_check() ||
+                    !audit.getWell_installed_information().equals(this.audit.getWell_installed_information()) ||
+
+                    FileUtil.compare(files[0], this.files[0]) != 0 ||
+                    FileUtil.compare(files[1], this.files[1]) != 0
+                ){
+                isChanged = true;
+            }
         }else{
             isChanged = true;
         }

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
+import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
 
@@ -68,6 +69,7 @@ public class PengecekanKnalpotFragment extends AuditBaseFragment {
             bentInformationEditText.setText(audit.getBent_information());
 
             standardCheckBox.setChecked(audit.isStandard_check());
+            standardEmmisionEditText.setText(audit.getStandard_emission());
             standardInformationEditText.setText(audit.getStandard_information());
         }
     }
@@ -80,12 +82,31 @@ public class PengecekanKnalpotFragment extends AuditBaseFragment {
         audit.setBent_information(bentInformationEditText.getText().toString().trim());
 
         audit.setStandard_check(standardCheckBox.isChecked());
+        audit.setStandard_emission(standardEmmisionEditText.getText().toString().trim());
         audit.setStandard_information(standardInformationEditText.getText().toString().trim());
         return true;
     }
 
     @Override
     public boolean isChanged(Audit audit, File[] files) {
-        return false;
+        boolean isChanged = false;
+        if(audit.isInstantiated2()){
+            if(
+                    audit.isBent_check() != this.audit.isBent_check() ||
+                    !audit.getBent_information().equals(this.audit.getBent_information()) ||
+
+                    audit.isStandard_check() != this.audit.isStandard_check() ||
+                    !audit.getStandard_emission().equals(audit.getStandard_emission()) ||
+                    !audit.getStandard_information().equals(this.audit.getStandard_information()) ||
+
+                    FileUtil.compare(files[0], this.files[0]) != 0 ||
+                    FileUtil.compare(files[1], this.files[1]) != 0
+                ){
+                isChanged = true;
+            }
+        }else{
+            isChanged = true;
+        }
+        return isChanged;
     }
 }

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
+import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
 
@@ -84,6 +85,23 @@ public class PengecekanPemadamFragment extends AuditBaseFragment {
 
     @Override
     public boolean isChanged(Audit audit, File[] files) {
-        return false;
+        boolean isChanged = false;
+        if(audit.isInstantiated7()){
+            if(
+                    audit.isDcp_co2_check() != this.audit.isDcp_co2_check() ||
+                    !audit.getDcp_co2_information().equals(this.audit.getDcp_co2_information()) ||
+
+                    audit.isGood_condition_check() != this.audit.isGood_condition_check() ||
+                    !audit.getGood_condition_information().equals(this.audit.getGood_condition_information()) ||
+
+                    FileUtil.compare(files[0], this.files[0]) != 0 ||
+                    FileUtil.compare(files[1], this.files[1]) != 0
+                ){
+                isChanged = true;
+            }
+        }else{
+            isChanged = true;
+        }
+        return isChanged;
     }
 }
