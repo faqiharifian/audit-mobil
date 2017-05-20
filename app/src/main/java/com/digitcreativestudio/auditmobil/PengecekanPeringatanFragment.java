@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -49,23 +48,20 @@ public class PengecekanPeringatanFragment extends AuditBaseFragment {
     }
 
     @Override
-    public boolean isValid() {
-        return true;
-    }
-
-    @Override
-    public ArrayList<File> getFiles() {
-        return null;
-    }
-
-    @Override
     public void updateData(Audit audit, File[] files) {
-
+        if(audit.isInstantiated11()){
+            overallCheckBox.setChecked(audit.isOverall_check());
+            overallInformationEditText.setText(audit.getOverall_information());
+        }
     }
 
     @Override
-    public Audit getAudit() {
-        return null;
+    public boolean isValid() {
+        audit.setInstantiated11(true);
+
+        audit.setOverall_check(overallCheckBox.isChecked());
+        audit.setOverall_information(overallInformationEditText.getText().toString().trim());
+        return true;
     }
 
     @Override

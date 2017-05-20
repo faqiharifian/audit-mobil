@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -61,23 +60,26 @@ public class PengecekanLampuFragment extends AuditBaseFragment {
     }
 
     @Override
-    public boolean isValid() {
-        return true;
-    }
-
-    @Override
-    public ArrayList<File> getFiles() {
-        return null;
-    }
-
-    @Override
     public void updateData(Audit audit, File[] files) {
+        if(audit.isInstantiated5()){
+            lightOnClosedCheckBox.setChecked(audit.isLight_on_closed_check());
+            lightOnClosedInformationEditText.setText(audit.getLight_on_closed_information());
 
+            lightOverallCheckBox.setChecked(audit.isLight_overall_check());
+            lightOverallInformationEditText.setText(audit.getLight_overall_information());
+        }
     }
 
     @Override
-    public Audit getAudit() {
-        return null;
+    public boolean isValid() {
+        audit.setInstantiated5(true);
+
+        audit.setLight_on_closed_check(lightOnClosedCheckBox.isChecked());
+        audit.setLight_on_closed_information(lightOnClosedInformationEditText.getText().toString().trim());
+
+        audit.setLight_overall_check(lightOverallCheckBox.isChecked());
+        audit.setLight_overall_information(lightOverallInformationEditText.getText().toString().trim());
+        return true;
     }
 
     @Override

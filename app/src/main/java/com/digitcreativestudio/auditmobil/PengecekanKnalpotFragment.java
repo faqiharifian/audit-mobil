@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -63,22 +62,25 @@ public class PengecekanKnalpotFragment extends AuditBaseFragment {
     }
 
     @Override
-    public ArrayList<File> getFiles() {
-        return null;
-    }
-
-    @Override
     public void updateData(Audit audit, File[] files) {
+        if(audit.isInstantiated2()){
+            bentCheckBox.setChecked(audit.isBent_check());
+            bentInformationEditText.setText(audit.getBent_information());
 
-    }
-
-    @Override
-    public Audit getAudit() {
-        return null;
+            standardCheckBox.setChecked(audit.isStandard_check());
+            standardInformationEditText.setText(audit.getStandard_information());
+        }
     }
 
     @Override
     public boolean isValid() {
+        audit.setInstantiated2(true);
+
+        audit.setBent_check(bentCheckBox.isChecked());
+        audit.setBent_information(bentInformationEditText.getText().toString().trim());
+
+        audit.setStandard_check(standardCheckBox.isChecked());
+        audit.setStandard_information(standardInformationEditText.getText().toString().trim());
         return true;
     }
 

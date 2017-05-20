@@ -137,7 +137,7 @@ public class HomeActivity extends AppCompatActivity {
                     (new SessionPreference(HomeActivity.this)).setCarId(1);
                     mViewPager.setCurrentItem(1);
                 }
-            }, 5000);
+            }, 2000);
         }
     }
 

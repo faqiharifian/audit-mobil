@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -61,23 +60,26 @@ public class PengecekanPemadamFragment extends AuditBaseFragment {
     }
 
     @Override
-    public boolean isValid() {
-        return true;
-    }
-
-    @Override
-    public ArrayList<File> getFiles() {
-        return null;
-    }
-
-    @Override
     public void updateData(Audit audit, File[] files) {
+        if(audit.isInstantiated7()){
+            dcpCo2CheckBox.setChecked(audit.isDcp_co2_check());
+            dcpCo2InformationEditText.setText(audit.getDcp_co2_information());
 
+            goodConditionCheckBox.setChecked(audit.isGood_condition_check());
+            goodConditionInformationEditText.setText(audit.getGood_condition_information());
+        }
     }
 
     @Override
-    public Audit getAudit() {
-        return null;
+    public boolean isValid() {
+        audit.setInstantiated7(true);
+
+        audit.setDcp_co2_check(dcpCo2CheckBox.isChecked());
+        audit.setDcp_co2_information(dcpCo2InformationEditText.getText().toString().trim());
+
+        audit.setGood_condition_check(goodConditionCheckBox.isChecked());
+        audit.setGood_condition_information(dcpCo2InformationEditText.getText().toString().trim());
+        return true;
     }
 
     @Override

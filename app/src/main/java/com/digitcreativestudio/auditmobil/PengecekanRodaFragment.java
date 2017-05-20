@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -61,23 +60,26 @@ public class PengecekanRodaFragment extends AuditBaseFragment {
     }
 
     @Override
-    public boolean isValid() {
-        return true;
-    }
-
-    @Override
-    public ArrayList<File> getFiles() {
-        return null;
-    }
-
-    @Override
     public void updateData(Audit audit, File[] files) {
+        if(audit.isInstantiated9()){
+            frontTireCheckBox.setChecked(audit.isFront_tire_check());
+            frontTireInformationEditText.setText(audit.getFront_tire_information());
 
+            rearTireCheckBox.setChecked(audit.isRear_tire_check());
+            rearTireInformationEditText.setText(audit.getRear_tire_information());
+        }
     }
 
     @Override
-    public Audit getAudit() {
-        return null;
+    public boolean isValid() {
+        audit.setInstantiated9(true);
+
+        audit.setFront_tire_check(frontTireCheckBox.isChecked());
+        audit.setFront_tire_information(frontTireInformationEditText.getText().toString().trim());
+
+        audit.setRear_tire_check(rearTireCheckBox.isChecked());
+        audit.setRear_tire_information(rearTireInformationEditText.getText().toString().trim());
+        return true;
     }
 
     @Override

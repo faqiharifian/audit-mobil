@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -61,27 +60,36 @@ public class PengecekanBatteryFragment extends AuditBaseFragment {
     }
 
     @Override
+    public void updateData(Audit audit, File[] files) {
+        if(audit.isInstantiated4()){
+            wellMaintainedCheckBox.setChecked(audit.isWell_maintained_check());
+            wellMaintainedInformationEditText.setText(audit.getWell_maintained_information());
+
+            wellInstalledCheckBox.setChecked(audit.isWell_installed_check());
+            wellInstalledInformationEditText.setText(audit.getWell_installed_information());
+        }
+    }
+
+    @Override
     public boolean isValid() {
+        audit.setInstantiated4(true);
+
+        audit.setWell_maintained_check(wellMaintainedCheckBox.isChecked());
+        audit.setWell_maintained_information(wellMaintainedInformationEditText.getText().toString().trim());
+
+        audit.setWell_installed_check(wellInstalledCheckBox.isChecked());
+        audit.setWell_installed_information(wellInstalledCheckBox.getText().toString().trim());
         return true;
     }
 
     @Override
-    public ArrayList<File> getFiles() {
-        return null;
-    }
-
-    @Override
-    public void updateData(Audit audit, File[] files) {
-
-    }
-
-    @Override
-    public Audit getAudit() {
-        return null;
-    }
-
-    @Override
     public boolean isChanged(Audit audit, File[] files) {
-        return false;
+        boolean isChanged = false;
+        if(audit.isInstantiated4()){
+
+        }else{
+            isChanged = true;
+        }
+        return isChanged;
     }
 }

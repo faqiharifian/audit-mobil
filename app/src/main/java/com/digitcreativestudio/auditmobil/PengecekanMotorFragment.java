@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -73,23 +72,32 @@ public class PengecekanMotorFragment extends AuditBaseFragment {
     }
 
     @Override
-    public boolean isValid() {
-        return true;
-    }
-
-    @Override
-    public ArrayList<File> getFiles() {
-        return null;
-    }
-
-    @Override
     public void updateData(Audit audit, File[] files) {
+        if(audit.isInstantiated1()){
+            safetySwitch1CheckBox.setChecked(audit.isSafety_switch_1_check());
+            safetySwitch1InformationEditText.setText(audit.getSafety_switch_1_information());
 
+            safetySwitch2CheckBox.setChecked(audit.isSafety_switch_2_check());
+            safetySwitch2InformationEditText.setText(audit.getSafety_switch_2_information());
+
+            starterCheckBox.setChecked(audit.isStarter_check());
+            starterInformationEditText.setText(audit.getStarter_information());
+        }
     }
 
     @Override
-    public Audit getAudit() {
-        return null;
+    public boolean isValid() {
+        audit.setInstantiated1(true);
+
+        audit.setSafety_switch_1_check(safetySwitch1CheckBox.isChecked());
+        audit.setSafety_switch_1_information(safetySwitch1InformationEditText.getText().toString().trim());
+
+        audit.setSafety_switch_2_check(safetySwitch2CheckBox.isChecked());
+        audit.setSafety_switch_2_information(safetySwitch2InformationEditText.getText().toString().trim());
+
+        audit.setStarter_check(starterCheckBox.isChecked());
+        audit.setStarter_information(starterInformationEditText.getText().toString().trim());
+        return true;
     }
 
     @Override

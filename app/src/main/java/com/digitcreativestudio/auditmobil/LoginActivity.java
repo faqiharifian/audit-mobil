@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         sessionPreference.createLoginSession(new User(1, "faqiharifianaji@gmail.com"));
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                     }
-                }, 5000);
+                }, 2000);
             }
         }
     }

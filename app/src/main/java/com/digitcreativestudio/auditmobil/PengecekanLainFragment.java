@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -73,23 +72,32 @@ public class PengecekanLainFragment extends AuditBaseFragment {
     }
 
     @Override
-    public boolean isValid() {
-        return true;
-    }
-
-    @Override
-    public ArrayList<File> getFiles() {
-        return null;
-    }
-
-    @Override
     public void updateData(Audit audit, File[] files) {
+        if(audit.isInstantiated12()){
+            emergencyCheckBox.setChecked(audit.isEmergency_check());
+            emergencyInformationEditText.setText(audit.getEmergency_information());
 
+            doorCheckBox.setChecked(audit.isDoor_check());
+            doorInformationEditText.setText(audit.getDoor_information());
+
+            spatborCheckBox.setChecked(audit.isSpatbor_check());
+            spatborInformationEditText.setText(audit.getSpatbor_information());
+        }
     }
 
     @Override
-    public Audit getAudit() {
-        return null;
+    public boolean isValid() {
+        audit.setInstantiated12(true);
+
+        audit.setEmergency_check(emergencyCheckBox.isChecked());
+        audit.setEmergency_information(emergencyInformationEditText.getText().toString().trim());
+
+        audit.setDoor_check(doorCheckBox.isChecked());
+        audit.setDoor_information(doorInformationEditText.getText().toString().trim());
+
+        audit.setSpatbor_check(spatborCheckBox.isChecked());
+        audit.setSpatbor_information(spatborInformationEditText.getText().toString().trim());
+        return true;
     }
 
     @Override

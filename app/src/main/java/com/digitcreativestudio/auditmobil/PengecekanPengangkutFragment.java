@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -73,23 +72,32 @@ public class PengecekanPengangkutFragment extends AuditBaseFragment {
     }
 
     @Override
-    public boolean isValid() {
-        return true;
-    }
-
-    @Override
-    public ArrayList<File> getFiles() {
-        return null;
-    }
-
-    @Override
     public void updateData(Audit audit, File[] files) {
+        if(audit.isInstantiated6()){
+            nonporousHasLogoCheckBox.setChecked(audit.isNonporous_has_logo_check());
+            nonporousHasLogoInformationEditText.setText(audit.getNonporous_has_logo_information());
 
+            clearWritingCheckBox.setChecked(audit.isClear_writing_check());
+            clearWritingInformationEditText.setText(audit.getClear_writing_information());
+
+            woodCoatedCheckBox.setChecked(audit.isWood_coated_check());
+            woodCoatedInformationEditText.setText(audit.getWood_coated_information());
+        }
     }
 
     @Override
-    public Audit getAudit() {
-        return null;
+    public boolean isValid() {
+        audit.setInstantiated6(true);
+
+        audit.setNonporous_has_logo_check(nonporousHasLogoCheckBox.isChecked());
+        audit.setNonporous_has_logo_information(nonporousHasLogoInformationEditText.getText().toString().trim());
+
+        audit.setClear_writing_check(clearWritingCheckBox.isChecked());
+        audit.setClear_writing_information(clearWritingInformationEditText.getText().toString().trim());
+
+        audit.setWood_coated_check(woodCoatedCheckBox.isChecked());
+        audit.setWood_coated_information(woodCoatedInformationEditText.getText().toString().trim());
+        return true;
     }
 
     @Override

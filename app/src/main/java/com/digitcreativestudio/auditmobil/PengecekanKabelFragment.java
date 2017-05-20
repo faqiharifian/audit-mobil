@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -61,23 +60,26 @@ public class PengecekanKabelFragment extends AuditBaseFragment {
     }
 
     @Override
-    public boolean isValid() {
-        return true;
-    }
-
-    @Override
-    public ArrayList<File> getFiles() {
-        return null;
-    }
-
-    @Override
     public void updateData(Audit audit, File[] files) {
+        if(audit.isInstantiated3()){
+            isolatedCheckBox.setChecked(audit.isolated_check());
+            isolatedInformationEditText.setText(audit.getIsolated_information());
 
+            fuseOriginalCheckBox.setChecked(audit.isFuse_original_check());
+            fuseOriginalInformationEditText.setText(audit.getFuse_original_information());
+        }
     }
 
     @Override
-    public Audit getAudit() {
-        return null;
+    public boolean isValid() {
+        audit.setInstantiated3(true);
+
+        audit.setIsolated_check(isolatedCheckBox.isChecked());
+        audit.setIsolated_information(isolatedInformationEditText.getText().toString().trim());
+
+        audit.setFuse_original_check(fuseOriginalCheckBox.isChecked());
+        audit.setFuse_original_information(fuseOriginalInformationEditText.getText().toString().trim());
+        return true;
     }
 
     @Override

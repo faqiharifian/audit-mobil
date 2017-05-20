@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -67,11 +66,6 @@ public class PengecekanUmumFragment extends AuditBaseFragment {
     }
 
     @Override
-    public ArrayList<File> getFiles() {
-        return null;
-    }
-
-    @Override
     public void updateData(Audit audit, File[] files) {
         if(audit.isInstantiated0()){
             stnkCheckBox.setChecked(audit.isStnk_check());
@@ -82,11 +76,6 @@ public class PengecekanUmumFragment extends AuditBaseFragment {
             llajrValidDateEditText.setText(audit.getLlajr_valid_date());
             llajrInformationEditText.setText(audit.getLlajr_information());
         }
-    }
-
-    @Override
-    public Audit getAudit() {
-        return audit;
     }
 
     @Override

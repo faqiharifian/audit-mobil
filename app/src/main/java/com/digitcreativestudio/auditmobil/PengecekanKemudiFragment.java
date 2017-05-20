@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -61,23 +60,26 @@ public class PengecekanKemudiFragment extends AuditBaseFragment {
     }
 
     @Override
-    public boolean isValid() {
-        return true;
-    }
-
-    @Override
-    public ArrayList<File> getFiles() {
-        return null;
-    }
-
-    @Override
     public void updateData(Audit audit, File[] files) {
+        if(audit.isInstantiated10()){
+            steerMaxCheckBox.setChecked(audit.isSteer_max_check());
+            steerMaxInformationEditText.setText(audit.getSteer_max_information());
 
+            easySteerCheckBox.setChecked(audit.isEasy_steer_check());
+            easySteerInformationEditText.setText(audit.getEasy_steer_information());
+        }
     }
 
     @Override
-    public Audit getAudit() {
-        return null;
+    public boolean isValid() {
+        audit.setInstantiated10(true);
+
+        audit.setSteer_max_check(steerMaxCheckBox.isChecked());
+        audit.setSteer_max_information(steerMaxInformationEditText.getText().toString().trim());
+
+        audit.setEasy_steer_check(easySteerCheckBox.isChecked());
+        audit.setEasy_steer_information(easySteerInformationEditText.getText().toString().trim());
+        return true;
     }
 
     @Override

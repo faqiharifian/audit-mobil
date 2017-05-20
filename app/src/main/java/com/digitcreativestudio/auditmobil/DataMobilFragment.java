@@ -40,7 +40,6 @@ public class DataMobilFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_data_mobil, container, false);
         policeNumberEditText = (EditText) rootView.findViewById(R.id.nomor_polisi_edit_text);
-//        policeNumberEditText.setText("aaaaaa");
         managerEditText = (EditText) rootView.findViewById(R.id.pengelola_edit_text);
         lastCheckDateEditText = (EditText) rootView.findViewById(R.id.tgl_pemeriksaan_terakhir_edit_text);
         checkDateEditText = (EditText) rootView.findViewById(R.id.tgl_pemeriksaan_edit_text);
@@ -56,15 +55,6 @@ public class DataMobilFragment extends BaseFragment {
     public boolean isValid() {
         boolean isValid = true;
         car = new Car();
-//        policeNumberEditText = (EditText) getActivity().findViewById(R.id.nomor_polisi_edit_text);
-//        managerEditText = (EditText) getActivity().findViewById(R.id.pengelola_edit_text);
-//        lastCheckDateEditText = (EditText) getActivity().findViewById(R.id.tgl_pemeriksaan_terakhir_edit_text);
-//        checkDateEditText = (EditText) getActivity().findViewById(R.id.tgl_pemeriksaan_edit_text);
-//        brandYearEditText = (EditText) getActivity().findViewById(R.id.merek_mobil_edit_text);
-//        productEditText = (EditText) getActivity().findViewById(R.id.jenis_produk_edit_text);
-//        capacityEditText = (EditText) getActivity().findViewById(R.id.kapasitas_edit_text);
-//        locationEditText = (EditText) getActivity().findViewById(R.id.lokasi_edit_text);
-
         String policeNumber = policeNumberEditText.getText().toString().trim();
         car.setPoliceNumber(policeNumber);
         if(policeNumber.isEmpty()){
