@@ -42,7 +42,7 @@
 
     <string name="text_safety_switch_1">Safety switch (utk. accu) mudah terjangkau</string>
     <string name="text_safety_switch_2">Safety switch (utk. accu) yang diputus arus + dari accu</string>
-    <string name="text_safety_switch_3">Starter sambungan kabel dari tombol ke dynamo terpasang dengan baik</string>
+    <string name="text_starter">Starter sambungan kabel dari tombol ke dynamo terpasang dengan baik</string>
 
     <string name="text_knalpot_1">Ditempatkan di depan bengkok kanan dan tidak bocor</string>
     <string name="text_knalpot_2">Saringan knalpot menggunakan standar PERTAMINA</string>
@@ -76,6 +76,7 @@
     <string name="text_lain_1">Kotak obat P3K, kipas kaca, segitiga pengaman lengkap </string>
     <string name="text_lain_2">Pintu bisa dibuka dengan mudah, body kendaraan tidak keropos</string>
     <string name="text_lain_3">Spatbor lengkap, kaca spion lengkap, dongkrak dan peralatanya</string>
+    <string name="change_image">Tap to change</string>
 
 
 </resources>

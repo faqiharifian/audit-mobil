@@ -27,26 +27,33 @@
                 android:gravity="center_vertical"
                 android:layout_marginBottom="10dp">
                 <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
+                    android:id="@+id/check_emergency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_lain_1"/>
+                    android:text="@string/text_lain_1" />
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/image_emergency"
                     android:layout_width="match_parent"
                     android:layout_height="130dp" />
                 <ImageView
+                    android:id="@+id/image_emergency_add"
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_add_image"
                     android:layout_width="60dp"
                     android:layout_height="60dp"/>
+                <TextView
+                    android:id="@+id/text_emergency_change_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_image"
+                    style="@style/textChangeImage"/>
             </RelativeLayout>
             <EditText
+                android:id="@+id/edit_emergency_information"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_ket"
@@ -64,26 +71,33 @@
                 android:gravity="center_vertical"
                 android:layout_marginBottom="10dp">
                 <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
+                    android:id="@+id/check_door"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_lain_2"/>
+                    android:text="@string/text_lain_2" />
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/image_door"
                     android:layout_width="match_parent"
                     android:layout_height="130dp" />
                 <ImageView
+                    android:id="@+id/image_door_add"
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_add_image"
                     android:layout_width="60dp"
                     android:layout_height="60dp"/>
+                <TextView
+                    android:id="@+id/text_door_change_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_image"
+                    style="@style/textChangeImage"/>
             </RelativeLayout>
             <EditText
+                android:id="@+id/edit_door_information"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_ket"
@@ -101,26 +115,33 @@
                 android:gravity="center_vertical"
                 android:layout_marginBottom="10dp">
                 <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
+                    android:id="@+id/check_spatbor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_lain_3"/>
+                    android:text="@string/text_lain_3" />
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/image_spatbor"
                     android:layout_width="match_parent"
                     android:layout_height="130dp" />
                 <ImageView
+                    android:id="@+id/image_spatbor_add"
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_add_image"
                     android:layout_width="60dp"
                     android:layout_height="60dp"/>
+                <TextView
+                    android:id="@+id/text_spatbor_change_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_image"
+                    style="@style/textChangeImage"/>
             </RelativeLayout>
             <EditText
+                android:id="@+id/edit_spatbor_information"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_ket"

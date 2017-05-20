@@ -25,35 +25,40 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <CheckBox
+                    android:id="@+id/check_stnk"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_stnk"
-                    style="@style/titleCekStyle"/>
+                    android:text="@string/text_stnk" />
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:id="@+id/stnk_gambar_image_view"
+                    android:id="@+id/image_stnk"
                     android:layout_width="match_parent"
                     android:layout_height="150dp" />
                 <ImageView
+                    android:id="@+id/image_add_stnk"
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_add_image"
                     android:layout_width="60dp"
                     android:layout_height="60dp"/>
+                <TextView
+                    android:id="@+id/text_stnk_change_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_image"
+                    style="@style/textChangeImage"/>
             </RelativeLayout>
             <EditText
-                android:id="@+id/stnk_tgl_edit_text"
+                android:id="@+id/edit_stnk_valid_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_tgl"
+                android:inputType="date"
                 style="@style/editTextStyle"/>
             <EditText
-                android:id="@+id/stnk_ket_edit_text"
+                android:id="@+id/edit_stnk_information"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_ket"
@@ -69,34 +74,40 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <CheckBox
+                    android:id="@+id/check_llajr"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_keur_llajr"/>
+                    android:text="@string/text_keur_llajr" />
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:id="@+id/llajr_gambar_image_view"
+                    android:id="@+id/image_llajr"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"/>
                 <ImageView
+                    android:id="@+id/image_llajr_add"
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_add_image"
                     android:layout_width="60dp"
                     android:layout_height="60dp" />
+                <TextView
+                    android:id="@+id/text_llajr_change_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/change_image"
+                    style="@style/textChangeImage"/>
             </RelativeLayout>
             <EditText
-                android:id="@+id/llajr_tgl_edit_text"
+                android:id="@+id/edit_llajr_valid_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_tgl"
+                android:inputType="date"
                 style="@style/editTextStyle"/>
             <EditText
-                android:id="@+id/llajr_ket_edit_text"
+                android:id="@+id/edit_llajr_information"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_ket"

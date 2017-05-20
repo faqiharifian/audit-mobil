@@ -53,6 +53,15 @@
         <item name="android:layout_margin">3dp</item>
     </style>
 
+    <style name="textChangeImage">
+        <item name="android:padding">4dp</item>
+        <item name="android:background">#af000000</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
     <style name="AVLoadingIndicatorView">
         <item name="minWidth">48dip</item>
         <item name="maxWidth">48dip</item>
