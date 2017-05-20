@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
-import com.digitcreativestudio.auditmobil.utilities.SessionPreference;
 import com.digitcreativestudio.auditmobil.view.ProgressDialog;
 import com.digitcreativestudio.auditmobil.view.ViewPager;
 
@@ -46,6 +45,20 @@ public class PengecekanRootFragment extends Fragment {
     public static PengecekanRootFragment newInstance() {
         PengecekanRootFragment fragment = new PengecekanRootFragment();
         return fragment;
+    }
+
+    @Override
+    public void onResume() {
+        if(adapter != null){
+            if(adapter.audit != null) {
+                if (!adapter.audit.isInstantiated0()) {
+                    if(pager != null){
+                        pager.setCurrentItem(0);
+                    }
+                }
+            }
+        }
+        super.onResume();
     }
 
     @Override
@@ -113,7 +126,6 @@ public class PengecekanRootFragment extends Fragment {
                     .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
-                            (new SessionPreference(getContext())).removeCarId();
                             startActivity(new Intent(getActivity(), HomeActivity.class));
                         }
                     })
@@ -130,7 +142,6 @@ public class PengecekanRootFragment extends Fragment {
         public AuditFragmentStatePagerAdapter(FragmentManager fm) {
             super(fm);
             audit = new Audit();
-            audit.setId(String.valueOf((new SessionPreference(getActivity())).getCarId()));
             fragments = new ArrayList<>();
             fragments.add(PengecekanUmumFragment.newInstance());
             fragments.add(PengecekanMotorFragment.newInstance());

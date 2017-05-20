@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.digitcreativestudio.auditmobil.HomeActivity;
+import com.digitcreativestudio.auditmobil.entities.Car;
 import com.digitcreativestudio.auditmobil.entities.User;
 import com.google.gson.Gson;
 
@@ -23,7 +24,7 @@ public class SessionPreference {
     private static final String PREF_NAME = "AuditMobil";
     private static final String IS_LOGIN = "IsLoggedIn";
     private static final String KEY_USER = "user";
-    private static final String KEY_CAR_ID = "car_id";
+    private static final String KEY_CAR = "car";
 
 
 
@@ -59,17 +60,21 @@ public class SessionPreference {
         _context.startActivity(i);
     }
 
-    public void setCarId(int carId){
-        editor.putInt(KEY_CAR_ID, carId);
+    public void setCar(Car car){
+        Gson gson = new Gson();
+        String json = gson.toJson(car);
+        editor.putString(KEY_CAR, json);
         editor.commit();
     }
 
-    public int getCarId(){
-        return pref.getInt(KEY_CAR_ID, -1);
+    public Car getCar(){
+        Gson gson = new Gson();
+        String json = pref.getString(KEY_CAR, "");
+        return gson.fromJson(json, Car.class);
     }
 
-    public void removeCarId(){
-        editor.remove(KEY_CAR_ID);
+    public void removeCar(){
+        editor.remove(KEY_CAR);
         editor.commit();
     }
 

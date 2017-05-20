@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.digitcreativestudio.auditmobil.entities.Car;
+import com.digitcreativestudio.auditmobil.utilities.SessionPreference;
 
 /**
  * Created by ADIK on 15/05/2017.
@@ -48,6 +49,18 @@ public class DataMobilFragment extends BaseFragment {
         capacityEditText = (EditText) rootView.findViewById(R.id.kapasitas_edit_text);
         locationEditText = (EditText) rootView.findViewById(R.id.lokasi_edit_text);
 
+        Car car = (new SessionPreference(getContext())).getCar();
+        if(car != null){
+            policeNumberEditText.setText(car.getPoliceNumber());
+            managerEditText.setText(car.getManager());
+            lastCheckDateEditText.setText(car.getLastCheck());
+            checkDateEditText.setText(car.getCheckDate());
+            brandYearEditText.setText(car.getBrandYear());
+            productEditText.setText(car.getProduct());
+            capacityEditText.setText(car.getCapacity());
+            locationEditText.setText(car.getLocation());
+        }
+
         return rootView;
     }
 
@@ -64,43 +77,43 @@ public class DataMobilFragment extends BaseFragment {
         String manager = managerEditText.getText().toString().trim();
         car.setManager(manager);
         if(manager.isEmpty()){
-            managerEditText.setError("Masukkan nomor polisi");
+            managerEditText.setError("Masukkan pengelola");
             isValid = false;
         }
         String lastCheckDate = lastCheckDateEditText.getText().toString().trim();
         car.setLastCheck(lastCheckDate);
         if(lastCheckDate.isEmpty()){
-            lastCheckDateEditText.setError("Masukkan nomor polisi");
+            lastCheckDateEditText.setError("Masukkan tanggal terakhir pemeriksaan");
             isValid = false;
         }
         String checkDate = checkDateEditText.getText().toString().trim();
         car.setCheckDate(checkDate);
         if(checkDate.isEmpty()){
-            checkDateEditText.setError("Masukkan nomor polisi");
+            checkDateEditText.setError("Masukkan tanggal pemeriksaan");
             isValid = false;
         }
         String brandYear = brandYearEditText.getText().toString().trim();
         car.setBrandYear(brandYear);
         if(brandYear.isEmpty()){
-            brandYearEditText.setError("Masukkan nomor polisi");
+            brandYearEditText.setError("Masukkan merak dan tahun");
             isValid = false;
         }
         String product = productEditText.getText().toString().trim();
         car.setProduct(product);
         if(product.isEmpty()){
-            productEditText.setError("Masukkan nomor polisi");
+            productEditText.setError("Masukkan produk");
             isValid = false;
         }
         String capacity = capacityEditText.getText().toString().trim();
         car.setCapacity(capacity);
         if(capacity.isEmpty()){
-            capacityEditText.setError("Masukkan nomor polisi");
+            capacityEditText.setError("Masukkan kapasitas");
             isValid = false;
         }
         String location = locationEditText.getText().toString().trim();
         car.setLocation(location);
         if(location.isEmpty()){
-            locationEditText.setError("Masukkan nomor polisi");
+            locationEditText.setError("Masukkan lokasi");
             isValid = false;
         }
         return isValid;
@@ -109,5 +122,19 @@ public class DataMobilFragment extends BaseFragment {
     @Override
     public Car getCar() {
         return car;
+    }
+
+    @Override
+    public void updateData(Car car) {
+        if(car != null) {
+            policeNumberEditText.setText(car.getPoliceNumber());
+            managerEditText.setText(car.getManager());
+            lastCheckDateEditText.setText(car.getLastCheck());
+            checkDateEditText.setText(car.getCheckDate());
+            brandYearEditText.setText(car.getBrandYear());
+            productEditText.setText(car.getProduct());
+            capacityEditText.setText(car.getCapacity());
+            locationEditText.setText(car.getLocation());
+        }
     }
 }

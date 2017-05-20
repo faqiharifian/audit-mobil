@@ -12,4 +12,6 @@ public abstract class BaseFragment extends Fragment {
     public abstract boolean isValid();
 
     public abstract Car getCar();
+
+    public abstract void updateData(Car car);
 }

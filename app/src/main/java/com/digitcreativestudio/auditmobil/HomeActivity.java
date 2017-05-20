@@ -14,9 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.digitcreativestudio.auditmobil.entities.Car;
+import com.digitcreativestudio.auditmobil.utilities.PermissionUtil;
 import com.digitcreativestudio.auditmobil.utilities.SessionPreference;
 import com.digitcreativestudio.auditmobil.view.ProgressDialog;
 
@@ -30,10 +33,12 @@ public class HomeActivity extends AppCompatActivity {
     private SessionPreference sessionPreference;
     public TabLayout tabLayout;
 
+    Car car;
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        sessionPreference.removeCarId();
+    protected void onResume() {
+        PermissionUtil.askPermissions(this);
+        super.onResume();
     }
 
     @Override
@@ -61,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
             @Override
             public void onPageSelected(int position) {
-                if(sessionPreference.getCarId() == -1){
+                if(sessionPreference.getCar() == null){
                     mViewPager.setCurrentItem(0);
                     Toast.makeText(HomeActivity.this, "Mohon isi data mobil terlebih dahulu", Toast.LENGTH_LONG).show();
                 }else{
@@ -96,7 +101,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void postCar(View view){
-        BaseFragment baseFragment = (BaseFragment) mSectionsPagerAdapter.getItem(mViewPager.getCurrentItem());
+        final BaseFragment baseFragment = (BaseFragment) mSectionsPagerAdapter.getItem(mViewPager.getCurrentItem());
         if(baseFragment.isValid()){
             final ProgressDialog progressDialog = new ProgressDialog(HomeActivity.this);
 
@@ -104,6 +109,7 @@ public class HomeActivity extends AppCompatActivity {
 //
 //            AuditService auditService = AuditClient.getClient().create(AuditService.class);
 //
+//            car = baseFragment.getCar();
 //            Call<CarParser> call = auditService.postCarData(baseFragment.getCar());
 //            call.enqueue(new Callback<CarParser>() {
 //                @Override
@@ -139,8 +145,9 @@ public class HomeActivity extends AppCompatActivity {
             (new Handler()).postDelayed(new Runnable() {
                 public void run() {
                     progressDialog.hide();
-
-                    (new SessionPreference(HomeActivity.this)).setCarId(1);
+                    car = baseFragment.getCar();
+                    car.setId(1);
+                    sessionPreference.setCar(car);
                     mViewPager.setCurrentItem(1);
                 }
             }, 2000);
@@ -161,6 +168,12 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             return fragments.get(position);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            Object obj = super.instantiateItem(container, position);
+            return obj;
         }
 
         @Override
