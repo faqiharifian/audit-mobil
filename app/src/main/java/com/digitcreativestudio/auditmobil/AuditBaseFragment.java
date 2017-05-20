@@ -23,7 +23,7 @@ public abstract class AuditBaseFragment extends Fragment {
     }
 
     public File[] getFiles(){
-        return files;
+        return files.clone();
     }
 
     public Audit getAudit(){

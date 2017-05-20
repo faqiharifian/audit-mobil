@@ -29,9 +29,6 @@ import me.relex.circleindicator.CircleIndicator;
  */
 
 public class PengecekanRootFragment extends Fragment {
-
-    private static final String ARG_SECTION_NUMBER = "section_number";
-
     ViewPager pager;
     AuditFragmentStatePagerAdapter adapter;
 
