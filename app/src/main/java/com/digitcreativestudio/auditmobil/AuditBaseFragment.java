@@ -48,6 +48,6 @@ public abstract class AuditBaseFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-        }, 2000);
+        }, 1000);
     }
 }

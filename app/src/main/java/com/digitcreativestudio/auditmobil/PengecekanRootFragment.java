@@ -69,7 +69,7 @@ public class PengecekanRootFragment extends Fragment {
         progressDialog = new ProgressDialog(getContext());
 
         pager = (ViewPager) rootView.findViewById(R.id.pager_container);
-        adapter = new AuditFragmentStatePagerAdapter(getFragmentManager());
+        adapter = new AuditFragmentStatePagerAdapter(getFragmentManager(), pager);
         pager.setAdapter(adapter);
         pager.setPagingEnabled(false);
 
@@ -139,9 +139,11 @@ public class PengecekanRootFragment extends Fragment {
         Audit audit;
         List<AuditBaseFragment> fragments;
         File[][] files = new File[13][3];
-        public AuditFragmentStatePagerAdapter(FragmentManager fm) {
+        ViewPager pager;
+        public AuditFragmentStatePagerAdapter(FragmentManager fm, ViewPager pager) {
             super(fm);
             audit = new Audit();
+            this.pager = pager;
             fragments = new ArrayList<>();
             fragments.add(PengecekanUmumFragment.newInstance());
             fragments.add(PengecekanMotorFragment.newInstance());
@@ -159,9 +161,15 @@ public class PengecekanRootFragment extends Fragment {
         }
 
         @Override
+        public void finishUpdate(ViewGroup container) {
+            super.finishUpdate(container);
+
+            fragments.get(pager.getCurrentItem()).updateData(audit, files[pager.getCurrentItem()]);
+        }
+
+        @Override
         public Object instantiateItem(ViewGroup container, int position) {
             Object obj = super.instantiateItem(container, position);
-            fragments.get(position).updateData(audit, files[position]);
             return obj;
         }
 
@@ -180,6 +188,7 @@ public class PengecekanRootFragment extends Fragment {
             boolean isChanged = fragments.get(position).isChanged(audit, files[position]);
             if(isChanged){
                 Audit audit = fragments.get(position).getAudit();
+                files[position] = fragments.get(position).getFiles();
                 switch (position){
                     case 0:
                         this.audit.update0(audit);

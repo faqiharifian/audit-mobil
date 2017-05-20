@@ -36,7 +36,7 @@
                 <ImageView
                     android:id="@+id/image_stnk"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp" />
+                    android:layout_height="150dp"/>
                 <ImageView
                     android:id="@+id/image_add_stnk"
                     android:layout_centerInParent="true"
