@@ -31,6 +31,12 @@ public class HomeActivity extends AppCompatActivity {
     public TabLayout tabLayout;
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sessionPreference.removeCarId();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);

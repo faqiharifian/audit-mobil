@@ -15,11 +15,13 @@ import android.widget.ImageView;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.SessionPreference;
+import com.digitcreativestudio.auditmobil.view.ProgressDialog;
 import com.digitcreativestudio.auditmobil.view.ViewPager;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -36,6 +38,8 @@ public class PengecekanRootFragment extends Fragment {
 
     ImageView nextImageView, backImageView;
 
+    ProgressDialog progressDialog;
+
     public PengecekanRootFragment() {
     }
 
@@ -48,6 +52,8 @@ public class PengecekanRootFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_pengecekan_root, container, false);
+
+        progressDialog = new ProgressDialog(getContext());
 
         pager = (ViewPager) rootView.findViewById(R.id.pager_container);
         adapter = new AuditFragmentStatePagerAdapter(getFragmentManager());
@@ -76,9 +82,14 @@ public class PengecekanRootFragment extends Fragment {
                 int position = pager.getCurrentItem();
                 if(adapter.isValid(position)){
                     if(adapter.isChanged(position)){
-
-                        Log.e("changed", "changed");
-                        nextPager();
+                        adapter.post(position, progressDialog, new Callable<Void>(){
+                            @Override
+                            public Void call() throws Exception {
+                                progressDialog.hide();
+                                nextPager();
+                                return null;
+                            }
+                        });
                     }else{
                         Log.e("unchanged", "unchanged");
                         nextPager();
@@ -92,7 +103,7 @@ public class PengecekanRootFragment extends Fragment {
 
     private void nextPager(){
         int position = pager.getCurrentItem();
-        if(position < adapter.getCount()){
+        if(position < adapter.getCount()-1){
             pager.setCurrentItem(position+1);
             backImageView.setVisibility(View.VISIBLE);
         }else{
@@ -102,14 +113,11 @@ public class PengecekanRootFragment extends Fragment {
                     .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
-                            startActivity(new Intent(getActivity(),HomeActivity.class));
+                            (new SessionPreference(getContext())).removeCarId();
+                            startActivity(new Intent(getActivity(), HomeActivity.class));
                         }
                     })
-                    .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                        }
-                    });
+                    .setNegativeButton("Tidak", null);
             builder.create();
             builder.show();
         }
@@ -210,5 +218,12 @@ public class PengecekanRootFragment extends Fragment {
             return fragments.get(position).isValid();
         }
 
+        public void post(int position, ProgressDialog progressDialog, Callable<Void> callable) {
+            try {
+                fragments.get(position).post(progressDialog, callable);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }

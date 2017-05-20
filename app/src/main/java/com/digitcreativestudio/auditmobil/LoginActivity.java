@@ -20,6 +20,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ProgressDialog progressDialog;
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sessionPreference.removeCarId();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
