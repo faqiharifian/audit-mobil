@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
@@ -68,6 +69,17 @@ public class PengecekanLampuFragment extends AuditBaseFragment {
 
             lightOverallCheckBox.setChecked(audit.isLight_overall_check());
             lightOverallInformationEditText.setText(audit.getLight_overall_information());
+
+            if(files[0] != null){
+                Glide.with(getContext()).load(files[0]).into(lightOnClosedImageView);
+                lightOnClosedAddImageView.setVisibility(View.GONE);
+                lightOnClosedChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[1] != null){
+                Glide.with(getContext()).load(files[1]).into(lightOverallImageView);
+                lightOverallAddImageView.setVisibility(View.GONE);
+                lightOverallChangeTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 

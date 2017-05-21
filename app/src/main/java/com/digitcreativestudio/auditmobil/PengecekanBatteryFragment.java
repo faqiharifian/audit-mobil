@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
@@ -68,6 +69,18 @@ public class PengecekanBatteryFragment extends AuditBaseFragment {
 
             wellInstalledCheckBox.setChecked(audit.isWell_installed_check());
             wellInstalledInformationEditText.setText(audit.getWell_installed_information());
+
+
+            if(files[0] != null){
+                Glide.with(getContext()).load(files[0]).into(wellMaintainedImageView);
+                wellMaintainedAddImageView.setVisibility(View.GONE);
+                wellMaintainedChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[1] != null){
+                Glide.with(getContext()).load(files[1]).into(wellInstalledImageView);
+                wellInstalledAddImageView.setVisibility(View.GONE);
+                wellInstalledChangeTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 

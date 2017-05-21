@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
@@ -68,6 +69,17 @@ public class PengecekanKemudiFragment extends AuditBaseFragment {
 
             easySteerCheckBox.setChecked(audit.isEasy_steer_check());
             easySteerInformationEditText.setText(audit.getEasy_steer_information());
+
+            if(files[0] != null){
+                Glide.with(getContext()).load(files[0]).into(steerMaxImageView);
+                steerMaxAddImageView.setVisibility(View.GONE);
+                steerMaxChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[1] != null){
+                Glide.with(getContext()).load(files[1]).into(easySteerImageView);
+                easySteerAddImageView.setVisibility(View.GONE);
+                easySteerChangeTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 

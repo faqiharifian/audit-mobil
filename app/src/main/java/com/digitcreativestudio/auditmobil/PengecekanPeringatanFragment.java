@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
@@ -53,6 +54,12 @@ public class PengecekanPeringatanFragment extends AuditBaseFragment {
         if(audit.isInstantiated11()){
             overallCheckBox.setChecked(audit.isOverall_check());
             overallInformationEditText.setText(audit.getOverall_information());
+
+            if(files[0] != null){
+                Glide.with(getContext()).load(files[0]).into(overallImageView);
+                overallAddImageView.setVisibility(View.GONE);
+                overallChangeTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 

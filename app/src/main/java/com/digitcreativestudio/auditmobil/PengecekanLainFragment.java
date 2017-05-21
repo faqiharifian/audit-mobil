@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
@@ -83,6 +84,22 @@ public class PengecekanLainFragment extends AuditBaseFragment {
 
             spatborCheckBox.setChecked(audit.isSpatbor_check());
             spatborInformationEditText.setText(audit.getSpatbor_information());
+
+            if(files[0] != null){
+                Glide.with(getContext()).load(files[0]).into(emergencyImageView);
+                emergencyAddImageView.setVisibility(View.GONE);
+                emergencyChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[1] != null){
+                Glide.with(getContext()).load(files[1]).into(doorImageView);
+                doorAddImageView.setVisibility(View.GONE);
+                doorChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[2] != null){
+                Glide.with(getContext()).load(files[2]).into(spatborImageView);
+                spatborAddImageView.setVisibility(View.GONE);
+                spatborChangeTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 

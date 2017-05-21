@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
@@ -68,6 +69,17 @@ public class PengecekanRodaFragment extends AuditBaseFragment {
 
             rearTireCheckBox.setChecked(audit.isRear_tire_check());
             rearTireInformationEditText.setText(audit.getRear_tire_information());
+
+            if(files[0] != null){
+                Glide.with(getContext()).load(files[0]).into(frontTireImageView);
+                frontTireAddImageView.setVisibility(View.GONE);
+                frontTireChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[1] != null){
+                Glide.with(getContext()).load(files[1]).into(rearTireImageView);
+                rearTireAddImageView.setVisibility(View.GONE);
+                rearTireChangeTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 

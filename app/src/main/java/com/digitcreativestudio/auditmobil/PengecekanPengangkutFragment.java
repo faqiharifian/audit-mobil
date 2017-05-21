@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
@@ -83,6 +84,22 @@ public class PengecekanPengangkutFragment extends AuditBaseFragment {
 
             woodCoatedCheckBox.setChecked(audit.isWood_coated_check());
             woodCoatedInformationEditText.setText(audit.getWood_coated_information());
+
+            if(files[0] != null){
+                Glide.with(getContext()).load(files[0]).into(nonporousHasLogoImageView);
+                nonporousHasLogoAddImageView.setVisibility(View.GONE);
+                nonporousHasLogoChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[1] != null){
+                Glide.with(getContext()).load(files[1]).into(clearWritingImageView);
+                clearWritingAddImageView.setVisibility(View.GONE);
+                clearWritingChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[2] != null){
+                Glide.with(getContext()).load(files[2]).into(woodCoatedImageView);
+                woodCoatedAddImageView.setVisibility(View.GONE);
+                woodCoatedChangeTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 

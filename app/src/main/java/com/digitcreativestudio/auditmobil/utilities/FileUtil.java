@@ -27,10 +27,6 @@ import java.util.Arrays;
  */
 
 public class FileUtil {
-    public static final String[] mimeTypes = new String[]{
-            "image/jpeg", "image/png", "image/jpg"
-    };
-
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public static String getPath(final Context context, final Uri uri) {
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;

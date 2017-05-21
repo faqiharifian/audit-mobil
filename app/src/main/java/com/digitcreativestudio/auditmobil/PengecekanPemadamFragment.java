@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
@@ -68,6 +69,17 @@ public class PengecekanPemadamFragment extends AuditBaseFragment {
 
             goodConditionCheckBox.setChecked(audit.isGood_condition_check());
             goodConditionInformationEditText.setText(audit.getGood_condition_information());
+
+            if(files[0] != null){
+                Glide.with(getContext()).load(files[0]).into(dcpCo2ImageView);
+                dcpCo2AddImageView.setVisibility(View.GONE);
+                dcpCo2ChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[1] != null){
+                Glide.with(getContext()).load(files[1]).into(goodConditionImageView);
+                goodConditionAddImageView.setVisibility(View.GONE);
+                goodConditionChangeTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 

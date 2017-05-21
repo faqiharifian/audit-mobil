@@ -1,5 +1,7 @@
 package com.digitcreativestudio.auditmobil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
@@ -18,7 +21,7 @@ import java.io.File;
  * Created by ADIK on 15/05/2017.
  */
 
-public class PengecekanMotorFragment extends AuditBaseFragment {
+public class PengecekanMotorFragment extends AuditBaseFragment implements View.OnClickListener {
     CheckBox safetySwitch1CheckBox;
     EditText safetySwitch1InformationEditText;
     ImageView safetySwitch1ImageView,
@@ -56,18 +59,21 @@ public class PengecekanMotorFragment extends AuditBaseFragment {
         safetySwitch1ImageView = (ImageView) rootView.findViewById(R.id.image_safety_switch_1);
         safetySwitch1AddImageView = (ImageView) rootView.findViewById(R.id.image_safety_switch_1_add);
         safetySwitch1ChangeTextView = (TextView) rootView.findViewById(R.id.text_safety_switch_1_change_image);
+        safetySwitch1ImageView.setOnClickListener(this);
 
         safetySwitch2CheckBox = (CheckBox ) rootView.findViewById(R.id.check_safety_switch_2);
         safetySwitch2InformationEditText = (EditText) rootView.findViewById(R.id.edit_safety_switch_2_information);
         safetySwitch2ImageView = (ImageView) rootView.findViewById(R.id.image_safety_switch_2);
         safetySwitch2AddImageView = (ImageView) rootView.findViewById(R.id.image_safety_switch_2_add);
         safetySwitch2ChangeTextView = (TextView) rootView.findViewById(R.id.text_safety_switch_2_change_image);
+        safetySwitch2ImageView.setOnClickListener(this);
 
         starterCheckBox = (CheckBox ) rootView.findViewById(R.id.check_starter);
         starterInformationEditText = (EditText) rootView.findViewById(R.id.edit_starter_information);
         starterImageView = (ImageView) rootView.findViewById(R.id.image_starter);
         starterAddImageView = (ImageView) rootView.findViewById(R.id.image_starter_add);
         starterChangeTextView = (TextView) rootView.findViewById(R.id.text_starter_change_image);
+        starterImageView.setOnClickListener(this);
 
         return rootView;
     }
@@ -83,6 +89,22 @@ public class PengecekanMotorFragment extends AuditBaseFragment {
 
             starterCheckBox.setChecked(audit.isStarter_check());
             starterInformationEditText.setText(audit.getStarter_information());
+
+            if(files[0] != null){
+                Glide.with(getContext()).load(files[0]).into(safetySwitch1ImageView);
+                safetySwitch1AddImageView.setVisibility(View.GONE);
+                safetySwitch1ChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[1] != null){
+                Glide.with(getContext()).load(files[1]).into(safetySwitch2ImageView);
+                safetySwitch2AddImageView.setVisibility(View.GONE);
+                safetySwitch2ChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[2] != null){
+                Glide.with(getContext()).load(files[2]).into(starterImageView);
+                starterAddImageView.setVisibility(View.GONE);
+                starterChangeTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -125,5 +147,44 @@ public class PengecekanMotorFragment extends AuditBaseFragment {
             isChanged = true;
         }
         return isChanged;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.image_safety_switch_1:
+                openPictureChooser(0);
+                break;
+            case R.id.image_safety_switch_2:
+                openPictureChooser(1);
+                break;
+            case R.id.image_starter:
+                openPictureChooser(2);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case PICTURE_CHOOSER_1_REQUEST:
+                    Glide.with(getContext()).load(files[0]).into(safetySwitch1ImageView);
+                    safetySwitch1AddImageView.setVisibility(View.GONE);
+                    safetySwitch1ChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+                case PICTURE_CHOOSER_2_REQUEST:
+                    Glide.with(getContext()).load(files[1]).into(safetySwitch2ImageView);
+                    safetySwitch2AddImageView.setVisibility(View.GONE);
+                    safetySwitch2ChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+                case PICTURE_CHOOSER_3_REQUEST:
+                    Glide.with(getContext()).load(files[2]).into(starterImageView);
+                    starterAddImageView.setVisibility(View.GONE);
+                    starterChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
     }
 }

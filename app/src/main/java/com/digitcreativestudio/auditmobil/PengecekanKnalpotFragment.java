@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
@@ -71,6 +72,17 @@ public class PengecekanKnalpotFragment extends AuditBaseFragment {
             standardCheckBox.setChecked(audit.isStandard_check());
             standardEmmisionEditText.setText(audit.getStandard_emission());
             standardInformationEditText.setText(audit.getStandard_information());
+
+            if(files[0] != null){
+                Glide.with(getContext()).load(files[0]).into(bentImageView);
+                bentAddImageView.setVisibility(View.GONE);
+                bentChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[1] != null){
+                Glide.with(getContext()).load(files[1]).into(standardImageView);
+                standardAddImageView.setVisibility(View.GONE);
+                standardChangeTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 

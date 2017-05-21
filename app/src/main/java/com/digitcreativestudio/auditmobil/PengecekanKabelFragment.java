@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
@@ -68,6 +69,17 @@ public class PengecekanKabelFragment extends AuditBaseFragment {
 
             fuseOriginalCheckBox.setChecked(audit.isFuse_original_check());
             fuseOriginalInformationEditText.setText(audit.getFuse_original_information());
+
+            if(files[0] != null){
+                Glide.with(getContext()).load(files[0]).into(isolatedImageView);
+                isolatedAddImageView.setVisibility(View.GONE);
+                isolatedChangeTextView.setVisibility(View.VISIBLE);
+            }
+            if(files[1] != null){
+                Glide.with(getContext()).load(files[1]).into(fuseOriginalImageView);
+                fuseOriginalAddImageView.setVisibility(View.GONE);
+                fuseOriginalChangeTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 

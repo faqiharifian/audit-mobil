@@ -2,7 +2,6 @@ package com.digitcreativestudio.auditmobil;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,24 +10,18 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
 import java.io.File;
-import java.util.Arrays;
-
-import static com.digitcreativestudio.auditmobil.utilities.FileUtil.mimeTypes;
 
 /**
  * Created by ADIK on 15/05/2017.
  */
 
 public class PengecekanUmumFragment extends AuditBaseFragment implements View.OnClickListener {
-    public static final int PICTURE_CHOOSER_1_REQUEST = 101;
-    public static final int PICTURE_CHOOSER_2_REQUEST = 102;
     CheckBox stnkCheckBox;
     EditText stnkValidDateEditText,
             stnkInformationEditText;
@@ -143,63 +136,32 @@ public class PengecekanUmumFragment extends AuditBaseFragment implements View.On
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-
-        intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-        try {
-            switch (v.getId()){
-                case R.id.image_stnk:
-                    startActivityForResult(
-                            Intent.createChooser(intent, "Choose"),
-                            PICTURE_CHOOSER_1_REQUEST);
-                    break;
-                case R.id.image_llajr:
-                    startActivityForResult(
-                            Intent.createChooser(intent, "Choose"),
-                            PICTURE_CHOOSER_2_REQUEST);
-                    break;
-            }
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(getActivity(), "Please install a File Manager.",
-                    Toast.LENGTH_SHORT).show();
+        switch (v.getId()){
+            case R.id.image_stnk:
+                openPictureChooser(0);
+                break;
+            case R.id.image_llajr:
+                openPictureChooser(1);
+                break;
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
-            case PICTURE_CHOOSER_1_REQUEST:
-            case PICTURE_CHOOSER_2_REQUEST:
-                if (resultCode == Activity.RESULT_OK) {
-                    Uri imageUri = data.getData();
-                    String imagePath = FileUtil.getPath(getContext(), imageUri);
-                    final File imageFile = new File(imagePath);
-                    if(!Arrays.asList(mimeTypes).contains(FileUtil.getType(getContext(), imageUri))){
-                        Toast.makeText(getActivity(), "Please select .jpg, .jpeg, .png file", Toast.LENGTH_LONG).show();
-                    }else{
-                        switch (requestCode){
-                            case PICTURE_CHOOSER_1_REQUEST:
-                                files[0] = imageFile;
-                                Glide.with(getContext()).load(imageFile).into(stnkImageView);
-                                stnkAddImageView.setVisibility(View.GONE);
-                                stnkChangeTextView.setVisibility(View.VISIBLE);
-                                break;
-                            case PICTURE_CHOOSER_2_REQUEST:
-                                files[1] = imageFile;
-                                Glide.with(getContext()).load(imageFile).into(llajrImageView);
-                                llajrAddImageView.setVisibility(View.GONE);
-                                llajrChangeTextView.setVisibility(View.VISIBLE);
-                                break;
-                        }
-                    }
-                }
-                break;
-            default:
-                super.onActivityResult(requestCode, resultCode, data);
-                break;
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case PICTURE_CHOOSER_1_REQUEST:
+                    Glide.with(getContext()).load(files[0]).into(stnkImageView);
+                    stnkAddImageView.setVisibility(View.GONE);
+                    stnkChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+                case PICTURE_CHOOSER_2_REQUEST:
+                    Glide.with(getContext()).load(files[1]).into(llajrImageView);
+                    llajrAddImageView.setVisibility(View.GONE);
+                    llajrChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.digitcreativestudio.auditmobil.entities.Audit;
 import com.digitcreativestudio.auditmobil.utilities.FileUtil;
 
@@ -53,6 +54,12 @@ public class PengecekanRemFragment extends AuditBaseFragment {
         if(audit.isInstantiated8()){
             workingCheckBox.setChecked(audit.isWorking_check());
             workingInformationEditText.setText(audit.getWorking_information());
+
+            if(files[0] != null){
+                Glide.with(getContext()).load(files[0]).into(workingImageView);
+                workingAddImageView.setVisibility(View.GONE);
+                workingChangeTextView.setVisibility(View.VISIBLE);
+            }
         }
     }
 
