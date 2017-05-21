@@ -130,10 +130,10 @@ public class PengecekanKnalpotFragment extends AuditBaseFragment {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.image_bent:
-                openPictureChooser(0);
+                openPictureChooser(PICTURE_CHOOSER_1_REQUEST);
                 break;
             case R.id.image_standard:
-                openPictureChooser(1);
+                openPictureChooser(PICTURE_CHOOSER_2_REQUEST);
                 break;
         }
     }

@@ -153,13 +153,13 @@ public class PengecekanMotorFragment extends AuditBaseFragment {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.image_safety_switch_1:
-                openPictureChooser(0);
+                openPictureChooser(PICTURE_CHOOSER_1_REQUEST);
                 break;
             case R.id.image_safety_switch_2:
-                openPictureChooser(1);
+                openPictureChooser(PICTURE_CHOOSER_2_REQUEST);
                 break;
             case R.id.image_starter:
-                openPictureChooser(2);
+                openPictureChooser(PICTURE_CHOOSER_3_REQUEST);
                 break;
         }
     }

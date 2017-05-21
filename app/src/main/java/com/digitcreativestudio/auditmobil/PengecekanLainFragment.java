@@ -153,13 +153,13 @@ public class PengecekanLainFragment extends AuditBaseFragment {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.image_emergency:
-                openPictureChooser(0);
+                openPictureChooser(PICTURE_CHOOSER_1_REQUEST);
                 break;
             case R.id.image_door:
-                openPictureChooser(1);
+                openPictureChooser(PICTURE_CHOOSER_2_REQUEST);
                 break;
             case R.id.image_spatbor:
-                openPictureChooser(2);
+                openPictureChooser(PICTURE_CHOOSER_3_REQUEST);
                 break;
         }
     }

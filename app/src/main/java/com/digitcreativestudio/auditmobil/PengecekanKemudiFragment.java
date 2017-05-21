@@ -125,10 +125,10 @@ public class PengecekanKemudiFragment extends AuditBaseFragment {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.image_steer_max:
-                openPictureChooser(0);
+                openPictureChooser(PICTURE_CHOOSER_1_REQUEST);
                 break;
             case R.id.image_easy_steer:
-                openPictureChooser(1);
+                openPictureChooser(PICTURE_CHOOSER_2_REQUEST);
                 break;
         }
     }
@@ -139,10 +139,14 @@ public class PengecekanKemudiFragment extends AuditBaseFragment {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case PICTURE_CHOOSER_1_REQUEST:
+                    Glide.with(getContext()).load(files[0]).into(steerMaxImageView);
+                    steerMaxAddImageView.setVisibility(View.GONE);
+                    steerMaxChangeTextView.setVisibility(View.VISIBLE);
                     break;
                 case PICTURE_CHOOSER_2_REQUEST:
-                    break;
-                case PICTURE_CHOOSER_3_REQUEST:
+                    Glide.with(getContext()).load(files[1]).into(easySteerImageView);
+                    easySteerAddImageView.setVisibility(View.GONE);
+                    easySteerChangeTextView.setVisibility(View.VISIBLE);
                     break;
             }
         }

@@ -125,10 +125,10 @@ public class PengecekanRodaFragment extends AuditBaseFragment {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.image_front_tire:
-                openPictureChooser(0);
+                openPictureChooser(PICTURE_CHOOSER_1_REQUEST);
                 break;
             case R.id.image_rear_tire:
-                openPictureChooser(1);
+                openPictureChooser(PICTURE_CHOOSER_2_REQUEST);
                 break;
         }
     }

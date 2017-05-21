@@ -36,7 +36,7 @@ public abstract class AuditBaseFragment extends Fragment implements View.OnClick
         files = new File[3];
     }
 
-    public void openPictureChooser(int index){
+    public void openPictureChooser(int requestCode){
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 
         intent.setType("image/*");
@@ -44,23 +44,8 @@ public abstract class AuditBaseFragment extends Fragment implements View.OnClick
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         try {
-            switch (index){
-                case 0:
-                    startActivityForResult(
-                            Intent.createChooser(intent, "Choose"),
-                            PICTURE_CHOOSER_1_REQUEST);
-                    break;
-                case 1:
-                    startActivityForResult(
-                            Intent.createChooser(intent, "Choose"),
-                            PICTURE_CHOOSER_2_REQUEST);
-                    break;
-                case 2:
-                    startActivityForResult(
-                            Intent.createChooser(intent, "Choose"),
-                            PICTURE_CHOOSER_3_REQUEST);
-                    break;
-            }
+            startActivityForResult(Intent.createChooser(intent, "Choose"),
+                    requestCode);
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(getActivity(), "Please install a File Manager.",
                     Toast.LENGTH_SHORT).show();
@@ -72,6 +57,7 @@ public abstract class AuditBaseFragment extends Fragment implements View.OnClick
         switch (requestCode){
             case PICTURE_CHOOSER_1_REQUEST:
             case PICTURE_CHOOSER_2_REQUEST:
+            case PICTURE_CHOOSER_3_REQUEST:
                 if (resultCode == Activity.RESULT_OK) {
                     Uri imageUri = data.getData();
                     String imagePath = FileUtil.getPath(getContext(), imageUri);

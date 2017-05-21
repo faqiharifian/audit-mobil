@@ -153,13 +153,13 @@ public class PengecekanPengangkutFragment extends AuditBaseFragment {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.image_nonporous_has_logo:
-                openPictureChooser(0);
+                openPictureChooser(PICTURE_CHOOSER_1_REQUEST);
                 break;
             case R.id.image_clear_writing:
-                openPictureChooser(1);
+                openPictureChooser(PICTURE_CHOOSER_2_REQUEST);
                 break;
             case R.id.image_wood_coated:
-                openPictureChooser(2);
+                openPictureChooser(PICTURE_CHOOSER_3_REQUEST);
                 break;
         }
     }
