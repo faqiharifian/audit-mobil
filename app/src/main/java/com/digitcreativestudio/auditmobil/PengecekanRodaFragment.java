@@ -1,5 +1,7 @@
 package com.digitcreativestudio.auditmobil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,12 +51,14 @@ public class PengecekanRodaFragment extends AuditBaseFragment {
         frontTireCheckBox = (CheckBox) rootView.findViewById(R.id.check_front_tire);
         frontTireInformationEditText = (EditText) rootView.findViewById(R.id.edit_front_tire_information);
         frontTireImageView = (ImageView) rootView.findViewById(R.id.image_front_tire);
+        frontTireImageView.setOnClickListener(this);
         frontTireAddImageView = (ImageView) rootView.findViewById(R.id.image_front_tire_add);
         frontTireChangeTextView = (TextView) rootView.findViewById(R.id.text_front_tire_change_image);
 
         rearTireCheckBox = (CheckBox) rootView.findViewById(R.id.check_rear_tire);
         rearTireInformationEditText = (EditText) rootView.findViewById(R.id.edit_rear_tire_information);
         rearTireImageView = (ImageView) rootView.findViewById(R.id.image_rear_tire);
+        rearTireImageView.setOnClickListener(this);
         rearTireAddImageView = (ImageView) rootView.findViewById(R.id.image_rear_tire_add);
         rearTireChangeTextView = (TextView) rootView.findViewById(R.id.text_rear_tire_change_image);
 
@@ -115,5 +119,36 @@ public class PengecekanRodaFragment extends AuditBaseFragment {
             isChanged = true;
         }
         return isChanged;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.image_front_tire:
+                openPictureChooser(0);
+                break;
+            case R.id.image_rear_tire:
+                openPictureChooser(1);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case PICTURE_CHOOSER_1_REQUEST:
+                    Glide.with(getContext()).load(files[0]).into(frontTireImageView);
+                    frontTireAddImageView.setVisibility(View.GONE);
+                    frontTireChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+                case PICTURE_CHOOSER_2_REQUEST:
+                    Glide.with(getContext()).load(files[1]).into(rearTireImageView);
+                    rearTireAddImageView.setVisibility(View.GONE);
+                    rearTireChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
     }
 }

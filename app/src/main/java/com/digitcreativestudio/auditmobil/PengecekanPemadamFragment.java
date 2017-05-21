@@ -1,5 +1,7 @@
 package com.digitcreativestudio.auditmobil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,12 +51,14 @@ public class PengecekanPemadamFragment extends AuditBaseFragment {
         dcpCo2CheckBox = (CheckBox) rootView.findViewById(R.id.check_dcp_co2);
         dcpCo2InformationEditText = (EditText) rootView.findViewById(R.id.edit_dcp_co2_information);
         dcpCo2ImageView = (ImageView) rootView.findViewById(R.id.image_dcp_co2);
+        dcpCo2ImageView.setOnClickListener(this);
         dcpCo2AddImageView = (ImageView) rootView.findViewById(R.id.image_dcp_co2_add);
         dcpCo2ChangeTextView = (TextView) rootView.findViewById(R.id.text_dcp_co2_change_image);
 
         goodConditionCheckBox = (CheckBox) rootView.findViewById(R.id.check_good_condition);
         goodConditionInformationEditText = (EditText) rootView.findViewById(R.id.edit_good_condition_information);
         goodConditionImageView = (ImageView) rootView.findViewById(R.id.image_good_condition);
+        goodConditionImageView.setOnClickListener(this);
         goodConditionAddImageView = (ImageView) rootView.findViewById(R.id.image_good_condition_add);
         goodConditionChangeTextView = (TextView) rootView.findViewById(R.id.text_good_condition_change_image);
 
@@ -115,5 +119,35 @@ public class PengecekanPemadamFragment extends AuditBaseFragment {
             isChanged = true;
         }
         return isChanged;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.image_dcp_co2:
+                openPictureChooser(0);
+                break;
+            case R.id.image_good_condition:
+                openPictureChooser(1);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case PICTURE_CHOOSER_1_REQUEST:Glide.with(getContext()).load(files[0]).into(dcpCo2ImageView);
+                    dcpCo2AddImageView.setVisibility(View.GONE);
+                    dcpCo2ChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+                case PICTURE_CHOOSER_2_REQUEST:
+                    Glide.with(getContext()).load(files[1]).into(goodConditionImageView);
+                    goodConditionAddImageView.setVisibility(View.GONE);
+                    goodConditionChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
     }
 }

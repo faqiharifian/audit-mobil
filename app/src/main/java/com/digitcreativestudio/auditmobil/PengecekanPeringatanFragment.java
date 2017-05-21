@@ -1,5 +1,7 @@
 package com.digitcreativestudio.auditmobil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,7 @@ public class PengecekanPeringatanFragment extends AuditBaseFragment {
         overallCheckBox = (CheckBox) rootView.findViewById(R.id.check_overall);
         overallInformationEditText = (EditText) rootView.findViewById(R.id.edit_overall_information);
         overallImageView = (ImageView) rootView.findViewById(R.id.image_overall);
+        overallImageView.setOnClickListener(this);
         overallAddImageView = (ImageView) rootView.findViewById(R.id.image_overall_add);
         overallChangeTextView = (TextView) rootView.findViewById(R.id.text_overall_change_image);
 
@@ -88,5 +91,28 @@ public class PengecekanPeringatanFragment extends AuditBaseFragment {
             isChanged = true;
         }
         return isChanged;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.image_overall:
+                openPictureChooser(0);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case PICTURE_CHOOSER_1_REQUEST:
+                    Glide.with(getContext()).load(files[0]).into(overallImageView);
+                    overallAddImageView.setVisibility(View.GONE);
+                    overallChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
     }
 }

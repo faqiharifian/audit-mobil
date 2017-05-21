@@ -1,5 +1,7 @@
 package com.digitcreativestudio.auditmobil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,12 +51,14 @@ public class PengecekanBatteryFragment extends AuditBaseFragment {
         wellMaintainedCheckBox = (CheckBox) rootView.findViewById(R.id.check_well_maintained);
         wellMaintainedInformationEditText = (EditText) rootView.findViewById(R.id.edit_well_maintained_information);
         wellMaintainedImageView = (ImageView) rootView.findViewById(R.id.image_well_maintained);
+        wellMaintainedImageView.setOnClickListener(this);
         wellMaintainedAddImageView = (ImageView) rootView.findViewById(R.id.image_well_maintained_add);
         wellMaintainedChangeTextView = (TextView) rootView.findViewById(R.id.text_well_maintained_change_image);
 
         wellInstalledCheckBox = (CheckBox) rootView.findViewById(R.id.check_well_installed);
         wellInstalledInformationEditText = (EditText) rootView.findViewById(R.id.edit_well_installed_information);
         wellInstalledImageView = (ImageView) rootView.findViewById(R.id.image_well_installed);
+        wellInstalledImageView.setOnClickListener(this);
         wellInstalledAddImageView = (ImageView) rootView.findViewById(R.id.image_well_installed_add);
         wellInstalledChangeTextView = (TextView) rootView.findViewById(R.id.text_well_installed_change_image);
 
@@ -116,5 +120,36 @@ public class PengecekanBatteryFragment extends AuditBaseFragment {
             isChanged = true;
         }
         return isChanged;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.image_well_maintained:
+                openPictureChooser(0);
+                break;
+            case R.id.image_well_installed:
+                openPictureChooser(1);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case PICTURE_CHOOSER_1_REQUEST:
+                    Glide.with(getContext()).load(files[0]).into(wellMaintainedImageView);
+                    wellMaintainedAddImageView.setVisibility(View.GONE);
+                    wellMaintainedChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+                case PICTURE_CHOOSER_2_REQUEST:
+                    Glide.with(getContext()).load(files[1]).into(wellInstalledImageView);
+                    wellInstalledAddImageView.setVisibility(View.GONE);
+                    wellInstalledChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.digitcreativestudio.auditmobil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,12 +51,14 @@ public class PengecekanKabelFragment extends AuditBaseFragment {
         isolatedCheckBox = (CheckBox) rootView.findViewById(R.id.check_isolated);
         isolatedInformationEditText = (EditText) rootView.findViewById(R.id.edit_isolated_information);
         isolatedImageView = (ImageView) rootView.findViewById(R.id.image_isolated);
+        isolatedImageView.setOnClickListener(this);
         isolatedAddImageView = (ImageView) rootView.findViewById(R.id.image_isolated_add);
         isolatedChangeTextView = (TextView) rootView.findViewById(R.id.text_isolated_change_image);
 
         fuseOriginalCheckBox = (CheckBox) rootView.findViewById(R.id.check_fuse_original);
         fuseOriginalInformationEditText = (EditText) rootView.findViewById(R.id.edit_fuse_original_information);
         fuseOriginalImageView = (ImageView) rootView.findViewById(R.id.image_fuse_original);
+        fuseOriginalImageView.setOnClickListener(this);
         fuseOriginalAddImageView = (ImageView) rootView.findViewById(R.id.image_fuse_original_add);
         fuseOriginalChangeTextView = (TextView) rootView.findViewById(R.id.text_fuse_original_change_image);
 
@@ -115,5 +119,38 @@ public class PengecekanKabelFragment extends AuditBaseFragment {
             isChanged = true;
         }
         return isChanged;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.image_isolated:
+                openPictureChooser(0);
+                break;
+            case R.id.image_fuse_original:
+                openPictureChooser(1);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case PICTURE_CHOOSER_1_REQUEST:
+                    Glide.with(getContext()).load(files[0]).into(isolatedImageView);
+                    isolatedAddImageView.setVisibility(View.GONE);
+                    isolatedChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+                case PICTURE_CHOOSER_2_REQUEST:
+                    Glide.with(getContext()).load(files[1]).into(fuseOriginalImageView);
+                    fuseOriginalAddImageView.setVisibility(View.GONE);
+                    fuseOriginalChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+                case PICTURE_CHOOSER_3_REQUEST:
+                    break;
+            }
+        }
     }
 }

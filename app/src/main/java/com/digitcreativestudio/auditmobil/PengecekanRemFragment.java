@@ -1,5 +1,7 @@
 package com.digitcreativestudio.auditmobil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,7 @@ public class PengecekanRemFragment extends AuditBaseFragment {
         workingCheckBox = (CheckBox) rootView.findViewById(R.id.check_working);
         workingInformationEditText = (EditText) rootView.findViewById(R.id.edit_working_information);
         workingImageView = (ImageView) rootView.findViewById(R.id.image_working);
+        workingImageView.setOnClickListener(this);
         workingAddImageView = (ImageView) rootView.findViewById(R.id.image_working_add);
         workingChangeTextView = (TextView) rootView.findViewById(R.id.text_working_change_image);
 
@@ -88,5 +91,28 @@ public class PengecekanRemFragment extends AuditBaseFragment {
             isChanged = true;
         }
         return isChanged;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.image_working:
+                openPictureChooser(0);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case PICTURE_CHOOSER_1_REQUEST:
+                    Glide.with(getContext()).load(files[0]).into(workingImageView);
+                    workingAddImageView.setVisibility(View.GONE);
+                    workingChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
     }
 }

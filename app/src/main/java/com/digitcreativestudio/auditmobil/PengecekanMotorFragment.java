@@ -21,7 +21,7 @@ import java.io.File;
  * Created by ADIK on 15/05/2017.
  */
 
-public class PengecekanMotorFragment extends AuditBaseFragment implements View.OnClickListener {
+public class PengecekanMotorFragment extends AuditBaseFragment {
     CheckBox safetySwitch1CheckBox;
     EditText safetySwitch1InformationEditText;
     ImageView safetySwitch1ImageView,

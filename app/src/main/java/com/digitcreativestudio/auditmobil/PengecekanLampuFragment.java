@@ -1,5 +1,7 @@
 package com.digitcreativestudio.auditmobil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,12 +51,14 @@ public class PengecekanLampuFragment extends AuditBaseFragment {
         lightOnClosedCheckBox = (CheckBox) rootView.findViewById(R.id.check_light_on_closed);
         lightOnClosedInformationEditText = (EditText) rootView.findViewById(R.id.edit_light_on_closed_information);
         lightOnClosedImageView = (ImageView) rootView.findViewById(R.id.image_light_on_closed);
+        lightOnClosedImageView.setOnClickListener(this);
         lightOnClosedAddImageView = (ImageView) rootView.findViewById(R.id.image_light_on_closed_add);
         lightOnClosedChangeTextView = (TextView) rootView.findViewById(R.id.text_light_on_closed_change_image);
 
         lightOverallCheckBox = (CheckBox) rootView.findViewById(R.id.check_light_overall);
         lightOverallInformationEditText = (EditText) rootView.findViewById(R.id.edit_light_overall_information);
         lightOverallImageView = (ImageView) rootView.findViewById(R.id.image_light_overall);
+        lightOverallImageView.setOnClickListener(this);
         lightOverallAddImageView = (ImageView) rootView.findViewById(R.id.image_light_overall_add);
         lightOverallChangeTextView = (TextView) rootView.findViewById(R.id.text_light_overall_change_image);
 
@@ -115,5 +119,36 @@ public class PengecekanLampuFragment extends AuditBaseFragment {
             isChanged = true;
         }
         return isChanged;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.image_light_on_closed:
+                openPictureChooser(0);
+                break;
+            case R.id.image_light_overall:
+                openPictureChooser(1);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case PICTURE_CHOOSER_1_REQUEST:
+                    Glide.with(getContext()).load(files[0]).into(lightOnClosedImageView);
+                    lightOnClosedAddImageView.setVisibility(View.GONE);
+                    lightOnClosedChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+                case PICTURE_CHOOSER_2_REQUEST:
+                    Glide.with(getContext()).load(files[1]).into(lightOverallImageView);
+                    lightOverallAddImageView.setVisibility(View.GONE);
+                    lightOverallChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
     }
 }

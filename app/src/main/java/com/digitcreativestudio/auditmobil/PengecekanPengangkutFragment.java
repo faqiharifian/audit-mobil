@@ -1,5 +1,7 @@
 package com.digitcreativestudio.auditmobil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,18 +57,21 @@ public class PengecekanPengangkutFragment extends AuditBaseFragment {
         nonporousHasLogoCheckBox = (CheckBox) rootView.findViewById(R.id.check_nonporous_has_logo);
         nonporousHasLogoInformationEditText = (EditText) rootView.findViewById(R.id.edit_nonporous_has_logo_information);
         nonporousHasLogoImageView = (ImageView) rootView.findViewById(R.id.image_nonporous_has_logo);
+        nonporousHasLogoImageView.setOnClickListener(this);
         nonporousHasLogoAddImageView = (ImageView) rootView.findViewById(R.id.image_nonporous_has_logo_add);
         nonporousHasLogoChangeTextView = (TextView) rootView.findViewById(R.id.text_nonporous_has_logo_change_image);
 
         clearWritingCheckBox = (CheckBox) rootView.findViewById(R.id.check_clear_writing);
         clearWritingInformationEditText = (EditText) rootView.findViewById(R.id.edit_clear_writing_information);
         clearWritingImageView = (ImageView) rootView.findViewById(R.id.image_clear_writing);
+        clearWritingImageView.setOnClickListener(this);
         clearWritingAddImageView = (ImageView) rootView.findViewById(R.id.image_clear_writing_add);
         clearWritingChangeTextView = (TextView) rootView.findViewById(R.id.text_clear_writing_change_image);
 
         woodCoatedCheckBox = (CheckBox) rootView.findViewById(R.id.check_wood_coated);
         woodCoatedInformationEditText = (EditText) rootView.findViewById(R.id.edit_wood_coated_information);
         woodCoatedImageView = (ImageView) rootView.findViewById(R.id.image_wood_coated);
+        woodCoatedImageView.setOnClickListener(this);
         woodCoatedAddImageView = (ImageView) rootView.findViewById(R.id.image_wood_coated_add);
         woodCoatedChangeTextView = (TextView) rootView.findViewById(R.id.text_wood_coated_change_image);
 
@@ -142,5 +147,44 @@ public class PengecekanPengangkutFragment extends AuditBaseFragment {
             isChanged = true;
         }
         return isChanged;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.image_nonporous_has_logo:
+                openPictureChooser(0);
+                break;
+            case R.id.image_clear_writing:
+                openPictureChooser(1);
+                break;
+            case R.id.image_wood_coated:
+                openPictureChooser(2);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case PICTURE_CHOOSER_1_REQUEST:
+                    Glide.with(getContext()).load(files[0]).into(nonporousHasLogoImageView);
+                    nonporousHasLogoAddImageView.setVisibility(View.GONE);
+                    nonporousHasLogoChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+                case PICTURE_CHOOSER_2_REQUEST:
+                    Glide.with(getContext()).load(files[1]).into(clearWritingImageView);
+                    clearWritingAddImageView.setVisibility(View.GONE);
+                    clearWritingChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+                case PICTURE_CHOOSER_3_REQUEST:
+                    Glide.with(getContext()).load(files[2]).into(woodCoatedImageView);
+                    woodCoatedAddImageView.setVisibility(View.GONE);
+                    woodCoatedChangeTextView.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
     }
 }

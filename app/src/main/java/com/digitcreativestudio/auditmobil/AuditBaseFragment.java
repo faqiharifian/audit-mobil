@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.view.View;
 import android.widget.Toast;
 
 import com.digitcreativestudio.auditmobil.entities.Audit;
@@ -19,7 +20,7 @@ import java.util.concurrent.Callable;
  * Created by faqih on 19/05/17.
  */
 
-public abstract class AuditBaseFragment extends Fragment {
+public abstract class AuditBaseFragment extends Fragment implements View.OnClickListener {
     public static final int PICTURE_CHOOSER_1_REQUEST = 101;
     public static final int PICTURE_CHOOSER_2_REQUEST = 102;
     public static final int PICTURE_CHOOSER_3_REQUEST = 103;

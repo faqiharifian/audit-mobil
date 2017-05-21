@@ -21,7 +21,7 @@ import java.io.File;
  * Created by ADIK on 15/05/2017.
  */
 
-public class PengecekanUmumFragment extends AuditBaseFragment implements View.OnClickListener {
+public class PengecekanUmumFragment extends AuditBaseFragment {
     CheckBox stnkCheckBox;
     EditText stnkValidDateEditText,
             stnkInformationEditText;
